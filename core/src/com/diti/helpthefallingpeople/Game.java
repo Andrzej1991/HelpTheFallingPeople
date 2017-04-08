@@ -7,13 +7,17 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Game extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
+	public final static String GAME_NAME = "Help The Falling People";
+	public final static int HEIGHT = 480;
+	public final static int WIDTH = 800;
+
+	SpriteBatch batch; //TODO delete
+	Texture img; //TODO delete
 	
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		batch = new SpriteBatch(); //TODO delete
+		img = new Texture("badlogic.jpg"); //TODO delete
 	}
 
 	@Override
