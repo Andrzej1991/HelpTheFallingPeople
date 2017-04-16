@@ -31,19 +31,87 @@ public class Menu extends AbstractScreen {
     @Override
     protected void init() {
         background = new Texture("menubgnd_placeholder.jpg");
+        initMenuButtons();
+    }
+
+    private void initMenuButtons() {
+        // Table for Buttons
+        Table table = new Table();
+        table.setSize(HTFPGame.WIDTH, HTFPGame.HEIGHT);
+
+        // Button Skin
+        Skin skin = new Skin();
+        TextureAtlas buttonAtlas = new TextureAtlas(Gdx.files.internal("skin/ui-blue.atlas"));
+        skin.addRegions(buttonAtlas);
+
+        // Button font
+        BitmapFont font = new BitmapFont();
+
+        //Button style
+        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
+        textButtonStyle.font = font;
+        textButtonStyle.up = skin.getDrawable("button_04");
+        //textButtonStyle.down = skin.getDrawable("button_02");
+
+        // Start Button
+        startBtn = new TextButton("New game", textButtonStyle);
+        startBtn.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                game.setScreen(new GameplayScreen(game));
+            }
+        });
+        startBtn.setDebug(true); //TODO turn off debug before releasing
+
+        // Options Button
+        optionsBtn = new TextButton("Options", textButtonStyle);
+
+        // Global Ranking Button
+        gloRankingBtn = new TextButton("Global Ranking", textButtonStyle);
+
+        // About Button
+        aboutBtn = new TextButton("About", textButtonStyle);
+
+        // Help Button
+        helpBtn = new TextButton("Help", textButtonStyle);
+
+        // Exit Button
+        exitBtn = new TextButton("Exit", textButtonStyle);
+
+        table.add(startBtn).minWidth(120);
+        table.row();
+        table.add(optionsBtn).minWidth(120);
+        table.row();
+        table.add(gloRankingBtn).minWidth(120);
+        table.row();
+        table.add(aboutBtn).minWidth(120);
+        table.row();
+        table.add(helpBtn).minWidth(120);
+        table.row();
+        table.add(exitBtn).minWidth(120);
+        table.row();
+        stage.addActor(table);
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
+        update();
+
+        drawing();
+    }
+
+    private void update() {
         stage.act();
+    }
+
+    private void drawing() {
         spriteBatch.begin();
         spriteBatch.draw(background, 0, 0);
         spriteBatch.end();
         stage.draw();
     }
-
-    
 
     @Override
     public void dispose() {
