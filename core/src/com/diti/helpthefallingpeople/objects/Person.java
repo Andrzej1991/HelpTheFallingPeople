@@ -3,6 +3,7 @@ package com.diti.helpthefallingpeople.objects;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
@@ -27,7 +28,7 @@ public class Person extends Image {
         posX = 100;//new Random().nextFloat();
         initGraphic();
         this.setSize(width, height);
-        speed = 10;
+        speed = 100;
     }
 
     private void initGraphic() {
@@ -44,8 +45,14 @@ public class Person extends Image {
                 frames[mIndex++] = personTMP[i][j];
             }
         }
-        animation = new Animation(0.5f, frames);
+        animation = new Animation(0.1f, frames);
         setCurrentFrame(getAnimation().getKeyFrame(0));
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        //super.draw(batch, parentAlpha);
+        batch.draw(currentFrame, getX(), getY(), getWidth(), getHeight());
     }
 
     public Animation getAnimation() {
