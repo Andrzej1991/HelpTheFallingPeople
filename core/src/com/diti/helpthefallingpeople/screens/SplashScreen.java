@@ -3,6 +3,7 @@ package com.diti.helpthefallingpeople.screens;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Timer;
 import com.diti.helpthefallingpeople.HTFPGame;
+import com.diti.helpthefallingpeople.services.PlayServices;
 
 /**
  * Created by DiTi on 2017-04-09.
