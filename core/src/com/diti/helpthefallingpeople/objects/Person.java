@@ -14,31 +14,27 @@ import java.util.Random;
  */
 
 public class Person extends Image {
-    float posX;
-    int frameCols, frameRows;
-    Animation animation;
-    Texture frameSheet;
-    TextureRegion[] frames;
-    TextureRegion currentFrame;
-    int width, height;
+    private Animation animation;
+    private TextureRegion currentFrame;
+    private int width, height;
     private float stateTime;
-    float speed;
+    private float speed;
 
     public Person() {
-        posX = 100;//new Random().nextFloat();
+        float posX = 100;
         initGraphic();
         this.setSize(width, height);
         speed = 100;
     }
 
     private void initGraphic() {
-        frameSheet = new Texture(Gdx.files.internal("sticker_anim_2x1.png"));
-        frameCols = 2;
-        frameRows = 1;
+        Texture frameSheet = new Texture(Gdx.files.internal("sticker_anim_2x1.png"));
+        int frameCols = 2;
+        int frameRows = 1;
         width = frameSheet.getWidth() / frameCols;
         height = frameSheet.getHeight() / frameRows;
         TextureRegion[][] personTMP = TextureRegion.split(frameSheet, width, height);
-        frames = new TextureRegion[frameCols * frameRows];
+        TextureRegion[] frames = new TextureRegion[frameCols * frameRows];
         int mIndex = 0;
         for (int i = 0; i < frameRows; i++) {
             for (int j = 0; j < frameCols; j++) {

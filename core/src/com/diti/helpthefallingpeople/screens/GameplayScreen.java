@@ -9,11 +9,11 @@ import com.diti.helpthefallingpeople.objects.Person;
  * Created by DiTi on 2017-04-09.
  */
 
-public class GameplayScreen extends AbstractScreen {
+class GameplayScreen extends AbstractScreen {
     private Texture background;
     private Person person;
 
-    public GameplayScreen(final HTFPGame game) {
+    GameplayScreen(final HTFPGame game) {
         super(game);
     }
 

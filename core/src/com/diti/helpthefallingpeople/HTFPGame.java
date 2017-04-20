@@ -11,14 +11,9 @@ public class HTFPGame extends Game {
     public final static String GAME_NAME = "Help The Falling People";
     public final static int HEIGHT = 480;
     public final static int WIDTH = 800;
+    private boolean paused;
 
-    SpriteBatch batch; //TODO delete
-    Texture img; //TODO delete
-
-    public static PlayServices playServices;
-
-    public HTFPGame(PlayServices playServices) {
-        this.playServices = playServices;
+    HTFPGame(PlayServices playServices) {
     }
 
 //    to use
@@ -33,6 +28,14 @@ public class HTFPGame extends Game {
 
     public HTFPGame() {
 
+    }
+
+    public boolean isPaused() {
+        return paused;
+    }
+
+    public void setPaused(boolean paused) {
+        this.paused = paused;
     }
 
     @Override
