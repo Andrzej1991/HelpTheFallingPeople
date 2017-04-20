@@ -21,6 +21,10 @@ public class HTFPGame extends Game {
         this.playServices = playServices;
     }
 
+    public HTFPGame(){
+
+    }
+
     @Override
     public void create() {
         this.setScreen(new SplashScreen(this));
