@@ -21,7 +21,17 @@ public class HTFPGame extends Game {
         this.playServices = playServices;
     }
 
-    public HTFPGame(){
+//    to use
+//   game.playServices.signIn();
+//game.playServices.signOut();
+//game.playServices.rateGame();
+//game.playServices.unlockAchievement();
+//game.playServices.submitScore(score);
+//game.playServices.showScore();
+//game.playServices.showAchievement();
+//game.playServices.isSignedIn();
+
+    public HTFPGame() {
 
     }
 
