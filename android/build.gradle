@@ -18,7 +18,11 @@ android {
         applicationId "com.diti.helpthefallingpeople"
         minSdkVersion 15
         targetSdkVersion 25
+        multiDexEnabled true
     }
+}
+dependencies {
+    compile 'com.android.support:multidex:1.0.1'
 }
 
 
