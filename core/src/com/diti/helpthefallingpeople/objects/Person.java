@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.diti.helpthefallingpeople.HTFPGame;
 
 import java.util.Random;
 
@@ -14,17 +15,20 @@ import java.util.Random;
  */
 
 public class Person extends Image {
+    float posX;
     private Animation animation;
     private TextureRegion currentFrame;
     private int width, height;
     private float stateTime;
     private float speed;
 
-    public Person() {
-        float posX = 100;
+    public Person(float posX, float speed) {
+        this.posX = posX * HTFPGame.WIDTH;
+        setX(this.posX);
+        this.speed = speed * 350 + 50;
         initGraphic();
         this.setSize(width, height);
-        speed = 100;
+        setOrigin(0, 0);
     }
 
     private void initGraphic() {
