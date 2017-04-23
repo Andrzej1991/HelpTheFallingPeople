@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Array;
 import com.diti.helpthefallingpeople.HTFPGame;
 import com.diti.helpthefallingpeople.objects.Person;
+import com.diti.helpthefallingpeople.objects.SpawnPoint;
 
 import java.util.Random;
 
@@ -16,6 +17,7 @@ class GameplayScreen extends AbstractScreen {
     private Texture background;
     private Person person;
     private Array<Person> people;
+    private SpawnPoint spawn;
     private Random random;
 
     GameplayScreen(final HTFPGame game) {
@@ -28,14 +30,19 @@ class GameplayScreen extends AbstractScreen {
         random = new Random();
         people = new Array<Person>();
         generatePeople(15);
+        generateSpawn();
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
         update();
-        person.setStateTime(person.getStateTime() + Gdx.graphics.getDeltaTime());
-        person.setCurrentFrame(person.getAnimation().getKeyFrame(person.getStateTime(), true));
+        for (int i=0; i<people.size; i++) {
+            people.get(i).setStateTime(people.get(i).getStateTime() + Gdx.graphics.getDeltaTime());
+            people.get(i).setCurrentFrame(people.get(i).getAnimation().getKeyFrame(people.get(i).getStateTime(), true));
+        }
+        spawn.setStateTime(spawn.getStateTime() + Gdx.graphics.getDeltaTime());
+        spawn.setCurrentFrame(spawn.getAnimation().getKeyFrame(spawn.getStateTime(), true));
         spriteBatch.begin();
         spriteBatch.draw(background, 0, 0);
         spriteBatch.end();
@@ -43,10 +50,10 @@ class GameplayScreen extends AbstractScreen {
     }
 
     private void update() {
-        //person.setY(person.getY() - Gdx.graphics.getDeltaTime() * person.getSpeed());
         for (int i=0; i<people.size; i++){
             people.get(i).setY(people.get(i).getY() - Gdx.graphics.getDeltaTime() * people.get(i).getSpeed());
         }
+        spawn.setX(spawn.getX() + Gdx.graphics.getDeltaTime() * spawn.getSpeed());
         stage.act();
     }
 
@@ -60,6 +67,12 @@ class GameplayScreen extends AbstractScreen {
         for (int i=0; i<people.size; i++){
             stage.addActor(people.get(i));
         }
+    }
+
+    private void generateSpawn(){
+        spawn = new SpawnPoint(200);
+        spawn.setDebug(true); //TODO turn off debug before releasing
+        stage.addActor(spawn);
     }
 
     @Override
