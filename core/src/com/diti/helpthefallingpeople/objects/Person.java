@@ -8,8 +8,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.diti.helpthefallingpeople.HTFPGame;
 
-import java.util.Random;
-
 /**
  * Created by DiTi on 2017-04-17.
  */
@@ -73,5 +71,9 @@ public class Person extends Image {
 
     public void setStateTime(float stateTime) {
         this.stateTime = stateTime;
+    }
+
+    public float getPosX() {
+        return posX;
     }
 }
