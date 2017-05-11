@@ -2,13 +2,11 @@ package com.diti.helpthefallingpeople.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.utils.Array;
 import com.diti.helpthefallingpeople.HTFPGame;
 import com.diti.helpthefallingpeople.objects.Person;
 import com.diti.helpthefallingpeople.objects.SpawnPoint;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -31,7 +29,7 @@ class GameplayScreen extends AbstractScreen {
 
     @Override
     protected void init() {
-        background = new Texture("gameplayscreen_placeholder.jpg");
+        background = new Texture("sub_screen.png");
         random = new Random();
         people = new ArrayList<Person>();
         generatePeople(15);
