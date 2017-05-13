@@ -1,7 +1,10 @@
 package com.diti.helpthefallingpeople.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.diti.helpthefallingpeople.HTFPGame;
 import com.diti.helpthefallingpeople.objects.Person;
 import com.diti.helpthefallingpeople.objects.SpawnPoint;
@@ -22,6 +25,10 @@ class GameplayScreen extends AbstractScreen {
     private List<Person> people;
     private SpawnPoint spawn;
     private Random random;
+    private Label.LabelStyle labelStyle;
+    private Label startCounterLabel;
+    private String startCounterStr;
+    private float mStartCounter;
 
     GameplayScreen(final HTFPGame game) {
         super(game);
@@ -30,6 +37,10 @@ class GameplayScreen extends AbstractScreen {
     @Override
     protected void init() {
         background = new Texture("sub_screen.png");
+        labelStyle = new Label.LabelStyle();
+        labelStyle.font = new BitmapFont();
+        labelStyle.fontColor = Color.BLACK;
+        initStartCounter();
         random = new Random();
         people = new ArrayList<Person>();
         generatePeople(15);
@@ -46,21 +57,48 @@ class GameplayScreen extends AbstractScreen {
         }
         spawn.setStateTime(spawn.getStateTime() + Gdx.graphics.getDeltaTime());
         spawn.setCurrentFrame(spawn.getAnimation().getKeyFrame(spawn.getStateTime(), true));
-        spriteBatch.begin();
-        spriteBatch.draw(background, 0, 0);
-        spriteBatch.end();
-        stage.draw();
+        drawing();
     }
 
     private void update() {
+        startCounterLabel.setText(startCounterStr);
+        startCounterLabel.setFontScale(5);
+
         for (int i = 0; i < people.size(); i++) {
             if (people.get(i).isVisible()) {
                 people.get(i).setY(people.get(i).getY() - Gdx.graphics.getDeltaTime() * people.get(i).getSpeed());
             }
         }
-        spawn.setX(spawn.getX() + Gdx.graphics.getDeltaTime() * spawn.getSpeed());
-        throwPeople();
+        if (mStartCounter < 0) {
+            spawn.setX(spawn.getX() + Gdx.graphics.getDeltaTime() * spawn.getSpeed());
+            throwPeople();
+        }
         stage.act();
+    }
+
+    private void drawing(){
+        spriteBatch.begin();
+        spriteBatch.draw(background, 0, 0);
+        spriteBatch.end();
+        if (mStartCounter > 0){
+            updateStartCounter();
+        }
+        if (mStartCounter < 0){
+            stage.getActors().removeValue(startCounterLabel,true);
+        }
+        stage.draw();
+    }
+
+    private void updateStartCounter(){
+        mStartCounter -= Gdx.graphics.getDeltaTime();
+        startCounterStr = String.format("%2.0f", mStartCounter);
+    }
+
+    private void initStartCounter(){
+        startCounterLabel = new Label("", labelStyle);
+        startCounterLabel.setPosition((float) ((HTFPGame.WIDTH*0.9)/2), HTFPGame.HEIGHT/2);
+        stage.addActor(startCounterLabel);
+        mStartCounter = 3;
     }
 
     private void generatePeople(int number) {
