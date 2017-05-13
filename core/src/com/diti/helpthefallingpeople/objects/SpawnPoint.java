@@ -70,4 +70,8 @@ public class SpawnPoint extends Image {
     public void setStateTime(float stateTime) {
         this.stateTime = stateTime;
     }
+
+    public void stopSpawn() {
+        this.speed = 0;
+    }
 }
