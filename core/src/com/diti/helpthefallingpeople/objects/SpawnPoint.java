@@ -20,7 +20,7 @@ public class SpawnPoint extends Image {
     private float speed;
 
     public SpawnPoint(float speed) {
-        setX(100);
+        setX(-100);
         setY(HTFPGame.HEIGHT - 50);
         this.speed = speed;
         initGraphic();
