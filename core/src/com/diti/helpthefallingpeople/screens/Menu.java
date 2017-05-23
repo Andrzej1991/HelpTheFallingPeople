@@ -66,18 +66,54 @@ public class Menu extends AbstractScreen {
 
         // Options Button
         optionsBtn = new TextButton("Options", textButtonStyle);
+        optionsBtn.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                game.setScreen(new OptionsScreen(game));
+            }
+        });
+        optionsBtn.setDebug(true);
 
         // Global Ranking Button
         gloRankingBtn = new TextButton("Global Ranking", textButtonStyle);
+        gloRankingBtn.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                game.setScreen(new RankingScreen(game));
+            }
+        });
 
         // About Button
         aboutBtn = new TextButton("About", textButtonStyle);
+        aboutBtn.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                game.setScreen(new AboutScreen(game));
+            }
+        });
 
         // Help Button
         helpBtn = new TextButton("Help", textButtonStyle);
+        helpBtn.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                game.setScreen(new HelpScreen(game));
+            }
+        });
 
         // Exit Button
         exitBtn = new TextButton("Exit", textButtonStyle);
+        exitBtn.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                Gdx.app.exit();
+            }
+        });
 
         table.add(startBtn).minWidth(120);
         table.row();
@@ -92,6 +128,7 @@ public class Menu extends AbstractScreen {
         table.add(exitBtn).minWidth(120);
         table.row();
         stage.addActor(table);
+        Gdx.input.setCatchBackKey(true);
     }
 
     @Override
