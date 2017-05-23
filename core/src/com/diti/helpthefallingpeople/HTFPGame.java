@@ -1,9 +1,9 @@
 package com.diti.helpthefallingpeople;
 
-import com.badlogic.gdx.*;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.diti.helpthefallingpeople.screens.Menu;
 import com.diti.helpthefallingpeople.screens.SplashScreen;
 import com.diti.helpthefallingpeople.services.PlayServices;
 
@@ -41,5 +41,11 @@ public class HTFPGame extends Game {
     @Override
     public void create() {
         this.setScreen(new SplashScreen(this));
+    }
+
+    public void backToMenu() {
+        if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
+            this.setScreen(new Menu(this));
+        }
     }
 }
