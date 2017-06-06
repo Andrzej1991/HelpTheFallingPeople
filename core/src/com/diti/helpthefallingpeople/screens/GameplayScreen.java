@@ -4,11 +4,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.diti.helpthefallingpeople.HTFPGame;
 import com.diti.helpthefallingpeople.objects.Person;
 import com.diti.helpthefallingpeople.objects.SpawnPoint;
 
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -30,6 +34,9 @@ class GameplayScreen extends AbstractScreen {
     private String startCounterStr;
     private float mStartCounter;
 
+    private int gameScore;
+    private Label scoreLabel;
+
     GameplayScreen(final HTFPGame game) {
         super(game);
     }
@@ -41,6 +48,7 @@ class GameplayScreen extends AbstractScreen {
         labelStyle.font = new BitmapFont();
         labelStyle.fontColor = Color.BLACK;
         initStartCounter();
+        initScore();
         random = new Random();
         people = new ArrayList<Person>();
         generatePeople(15);
@@ -63,6 +71,9 @@ class GameplayScreen extends AbstractScreen {
     private void update() {
         startCounterLabel.setText(startCounterStr);
         startCounterLabel.setFontScale(5);
+
+        scoreLabel.setText("Score: " + String.valueOf(getGameScore()));
+        scoreLabel.setFontScale(1);
 
         for (int i = 0; i < people.size(); i++) {
             if (people.get(i).isVisible()) {
@@ -94,11 +105,22 @@ class GameplayScreen extends AbstractScreen {
         startCounterStr = String.format("%2.0f", mStartCounter);
     }
 
+    private void updateScore(int update){
+        setGameScore(getGameScore() + update);
+    }
+
     private void initStartCounter(){
         startCounterLabel = new Label("", labelStyle);
         startCounterLabel.setPosition((float) ((HTFPGame.WIDTH*0.9)/2), HTFPGame.HEIGHT/2);
         stage.addActor(startCounterLabel);
         mStartCounter = 3;
+    }
+
+    private void initScore() {
+        scoreLabel = new Label("", labelStyle);
+        scoreLabel.setPosition(20, (float) (HTFPGame.HEIGHT*2/9));
+        stage.addActor(scoreLabel);
+        setGameScore(0);
     }
 
     private void generatePeople(int number) {
@@ -132,6 +154,14 @@ class GameplayScreen extends AbstractScreen {
     @Override
     public void dispose() {
         stage.dispose();
+    }
+
+    public int getGameScore() {
+        return gameScore;
+    }
+
+    public void setGameScore(int gameScore) {
+        this.gameScore = gameScore;
     }
 }
 
