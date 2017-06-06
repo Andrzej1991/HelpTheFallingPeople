@@ -129,6 +129,15 @@ class GameplayScreen extends AbstractScreen {
             person.setY(HTFPGame.HEIGHT - 50);
             person.setDebug(true); //TODO turn off debug before releasing
             person.setVisible(false);
+            person.addListener(new ClickListener(){
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    Actor a = event.getListenerActor();
+                    a.remove();
+                    updateScore(1);
+                    return super.touchDown(event, x, y, pointer, button);
+                }
+            });
             people.add(person);
         }
         Collections.sort(people, new PersonComparatorByPosX());
