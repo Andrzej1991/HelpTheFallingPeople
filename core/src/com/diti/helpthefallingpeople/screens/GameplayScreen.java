@@ -51,8 +51,7 @@ class GameplayScreen extends AbstractScreen {
         initScore();
         random = new Random();
         people = new ArrayList<Person>();
-        generatePeople(15);
-        generateSpawn();
+        initWave();
     }
 
     @Override
@@ -123,6 +122,11 @@ class GameplayScreen extends AbstractScreen {
         setGameScore(0);
     }
 
+    private void initWave() {
+        generatePeople(15);
+        generateSpawn();
+    }
+
     private void generatePeople(int number) {
         for (int i = 0; i < number; i++) {
             person = new Person(random.nextFloat(), random.nextFloat());
@@ -152,12 +156,26 @@ class GameplayScreen extends AbstractScreen {
         stage.addActor(spawn);
     }
 
+    private void sendWave() {
+        spawn.setX(spawn.getX() + Gdx.graphics.getDeltaTime() * spawn.getSpeed());
+        throwPeople();
+    }
+
     private void throwPeople() {
         for (int i = 0; i < people.size(); i++) {
             if (spawn.getX() + spawn.getWidth()/2 >= people.get(i).getPosX()) {
                 people.get(i).setVisible(true);
             }
         }
+    }
+
+    private void clearWave() {
+        stage.getActors().removeValue(spawn,true);
+        for (int i = 0; i < people.size(); i++) {
+            stage.getActors().removeValue(people.get(i),true);
+            //System.out.println(stage.getActors());
+        }
+        people.clear();
     }
 
     @Override
