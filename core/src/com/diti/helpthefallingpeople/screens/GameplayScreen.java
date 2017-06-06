@@ -80,8 +80,18 @@ class GameplayScreen extends AbstractScreen {
             }
         }
         if (mStartCounter < 0) {
-            spawn.setX(spawn.getX() + Gdx.graphics.getDeltaTime() * spawn.getSpeed());
-            throwPeople();
+            sendWave();
+        }
+        if (people.size() > 0) {
+            for (int i = 0; i <= people.size() - 1; i++) {
+                if (people.get(i).getY() > 0) {
+                    break;
+                } else if (i == people.size() - 1) {
+                    clearWave();
+                    initWave();
+                    sendWave();
+                }
+            }
         }
         stage.act();
     }
@@ -137,7 +147,9 @@ class GameplayScreen extends AbstractScreen {
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     Actor a = event.getListenerActor();
-                    a.remove();
+                    int i = people.indexOf(a);
+                    people.remove(i);
+                    stage.getActors().removeValue(a,false);
                     updateScore(1);
                     return super.touchDown(event, x, y, pointer, button);
                 }
