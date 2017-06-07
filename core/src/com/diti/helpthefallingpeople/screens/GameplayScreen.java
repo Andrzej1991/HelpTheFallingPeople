@@ -37,6 +37,10 @@ class GameplayScreen extends AbstractScreen {
     private int gameScore;
     private Label scoreLabel;
 
+    private Label clockLabel;
+    private String clockStr;
+    private float mClock;
+
     GameplayScreen(final HTFPGame game) {
         super(game);
     }
@@ -48,6 +52,7 @@ class GameplayScreen extends AbstractScreen {
         labelStyle.font = new BitmapFont();
         labelStyle.fontColor = Color.BLACK;
         initStartCounter();
+        initClock();
         initScore();
         random = new Random();
         people = new ArrayList<Person>();
@@ -70,6 +75,8 @@ class GameplayScreen extends AbstractScreen {
     private void update() {
         startCounterLabel.setText(startCounterStr);
         startCounterLabel.setFontScale(5);
+
+        clockLabel.setText(clockStr);
 
         scoreLabel.setText("Score: " + String.valueOf(getGameScore()));
         scoreLabel.setFontScale(1);
@@ -104,7 +111,12 @@ class GameplayScreen extends AbstractScreen {
             updateStartCounter();
         }
         if (mStartCounter < 0){
+            updateClock(true);
             stage.getActors().removeValue(startCounterLabel,true);
+        }
+        if (mClock <= 0){
+            updateClock(false);
+            showScoreDialog();
         }
         stage.draw();
     }
@@ -112,6 +124,15 @@ class GameplayScreen extends AbstractScreen {
     private void updateStartCounter(){
         mStartCounter -= Gdx.graphics.getDeltaTime();
         startCounterStr = String.format("%2.0f", mStartCounter);
+    }
+
+    private void updateClock(boolean update){
+        if (update) {
+            mClock -= Gdx.graphics.getDeltaTime();
+        } else {
+            mClock = 0;
+        }
+        clockStr = String.format("%2.0f", mClock);
     }
 
     private void updateScore(int update){
@@ -123,6 +144,13 @@ class GameplayScreen extends AbstractScreen {
         startCounterLabel.setPosition((float) ((HTFPGame.WIDTH*0.9)/2), HTFPGame.HEIGHT/2);
         stage.addActor(startCounterLabel);
         mStartCounter = 3;
+    }
+
+    private void initClock(){
+        clockLabel = new Label("", labelStyle);
+        clockLabel.setPosition((float)(HTFPGame.WIDTH*8/9), (float)(HTFPGame.HEIGHT*8/9));
+        stage.addActor(clockLabel);
+        mClock = 30;
     }
 
     private void initScore() {
@@ -188,6 +216,10 @@ class GameplayScreen extends AbstractScreen {
             //System.out.println(stage.getActors());
         }
         people.clear();
+    }
+
+    private void showScoreDialog(){
+        // TODO add code to pause and present dialog with score
     }
 
     @Override
