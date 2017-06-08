@@ -220,6 +220,7 @@ class GameplayScreen extends AbstractScreen {
 
     private void showScoreDialog(){
         // TODO add code to pause and present dialog with score
+        game.setScreen(new ScoreDialogScreen(game));
     }
 
     @Override
