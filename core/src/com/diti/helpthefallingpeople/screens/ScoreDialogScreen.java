@@ -1,10 +1,12 @@
 package com.diti.helpthefallingpeople.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -19,6 +21,9 @@ public class ScoreDialogScreen extends AbstractScreen {
 
     private Texture background;
     private TextButton restartBtn, menuBtn;
+    private Label.LabelStyle labelStyle;
+    private Label scoreLabel;
+    private String scoreStr;
 
     public ScoreDialogScreen(HTFPGame game) {
         super(game);
@@ -27,7 +32,11 @@ public class ScoreDialogScreen extends AbstractScreen {
     @Override
     protected void init() {
         background = new Texture("scoredialog_placeholder.jpg");
+        labelStyle = new Label.LabelStyle();
+        labelStyle.font = new BitmapFont();
+        labelStyle.fontColor = Color.BLACK;
         initButtons();
+        initScore();
     }
 
     private void initButtons() {
@@ -75,6 +84,14 @@ public class ScoreDialogScreen extends AbstractScreen {
         table.add(menuBtn).minWidth(60);
         stage.addActor(table);
         Gdx.input.setCatchBackKey(true);
+    }
+
+    private void initScore() {
+        scoreLabel = new Label("", labelStyle);
+        scoreLabel.setPosition(HTFPGame.WIDTH/2, (float) (HTFPGame.HEIGHT*0.7));
+        int score = game.getCurrentGameScore();
+        scoreLabel.setText("You have saved " + String.valueOf(score) + " people.");
+        stage.addActor(scoreLabel);
     }
 
     @Override
