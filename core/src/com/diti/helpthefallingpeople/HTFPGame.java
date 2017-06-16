@@ -12,6 +12,7 @@ public class HTFPGame extends Game {
     public final static int HEIGHT = 480;
     public final static int WIDTH = 800;
     private boolean paused;
+    private int currentGameScore;
 
     HTFPGame(PlayServices playServices) {
     }
@@ -36,6 +37,14 @@ public class HTFPGame extends Game {
 
     public void setPaused(boolean paused) {
         this.paused = paused;
+    }
+
+    public int getCurrentGameScore() {
+        return currentGameScore;
+    }
+
+    public void setCurrentGameScore(int currentGameScore) {
+        this.currentGameScore = currentGameScore;
     }
 
     @Override
