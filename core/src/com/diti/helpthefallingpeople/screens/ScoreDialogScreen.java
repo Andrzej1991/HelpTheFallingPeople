@@ -20,10 +20,9 @@ import com.diti.helpthefallingpeople.HTFPGame;
 public class ScoreDialogScreen extends AbstractScreen {
 
     private Texture background;
-    private TextButton restartBtn, menuBtn;
+    private TextButton submitBtn, restartBtn, menuBtn;
     private Label.LabelStyle labelStyle;
     private Label scoreLabel;
-    private String scoreStr;
 
     public ScoreDialogScreen(HTFPGame game) {
         super(game);
@@ -57,6 +56,17 @@ public class ScoreDialogScreen extends AbstractScreen {
         textButtonStyle.font = font;
         textButtonStyle.up = skin.getDrawable("button_04");
 
+        // Submit Button
+        submitBtn = new TextButton("Submit", textButtonStyle);
+        submitBtn.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                // TODO submit score to play sercives
+            }
+        });
+        submitBtn.setDebug(true); //TODO turn off debug before releasing
+
         // Restart Button
         restartBtn = new TextButton("Play again", textButtonStyle);
         restartBtn.addListener(new ClickListener() {
@@ -79,8 +89,9 @@ public class ScoreDialogScreen extends AbstractScreen {
         });
         menuBtn.setDebug(true); //TODO turn off debug before releasing
 
+        table.add(submitBtn).minWidth(120);
         table.add(restartBtn).minWidth(120);
-        table.add().minWidth(120);
+        //table.add().minWidth(120);
         table.add(menuBtn).minWidth(60);
         stage.addActor(table);
         Gdx.input.setCatchBackKey(true);
