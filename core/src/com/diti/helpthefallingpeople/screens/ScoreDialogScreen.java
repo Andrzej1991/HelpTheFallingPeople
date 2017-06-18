@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.diti.helpthefallingpeople.HTFPGame;
+import com.diti.helpthefallingpeople.services.PlayServices;
 
 /**
  * Created by terebun on 2017-06-08.
@@ -23,6 +24,7 @@ public class ScoreDialogScreen extends AbstractScreen {
     private TextButton submitBtn, restartBtn, menuBtn;
     private Label.LabelStyle labelStyle;
     private Label scoreLabel;
+    private PlayServices ps;
 
     public ScoreDialogScreen(HTFPGame game) {
         super(game);
@@ -34,6 +36,7 @@ public class ScoreDialogScreen extends AbstractScreen {
         labelStyle = new Label.LabelStyle();
         labelStyle.font = new BitmapFont();
         labelStyle.fontColor = Color.BLACK;
+        initPlayServices();
         initButtons();
         initScore();
     }
@@ -62,7 +65,7 @@ public class ScoreDialogScreen extends AbstractScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                // TODO submit score to play sercives
+                ps.submitScore(game.getCurrentGameScore());
             }
         });
         submitBtn.setDebug(true); //TODO turn off debug before releasing
@@ -103,6 +106,50 @@ public class ScoreDialogScreen extends AbstractScreen {
         int score = game.getCurrentGameScore();
         scoreLabel.setText("You have saved " + String.valueOf(score) + " people.");
         stage.addActor(scoreLabel);
+    }
+
+    private void initPlayServices(){
+        ps = new PlayServices() {
+            @Override
+            public void signIn() {
+
+            }
+
+            @Override
+            public void signOut() {
+
+            }
+
+            @Override
+            public void rateGame() {
+
+            }
+
+            @Override
+            public void unlockAchievement() {
+
+            }
+
+            @Override
+            public void submitScore(int highScore) {
+
+            }
+
+            @Override
+            public void showAchievement() {
+
+            }
+
+            @Override
+            public void showScore() {
+
+            }
+
+            @Override
+            public boolean isSignedIn() {
+                return false;
+            }
+        };
     }
 
     @Override
