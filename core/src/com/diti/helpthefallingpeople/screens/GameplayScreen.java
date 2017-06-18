@@ -233,6 +233,7 @@ class GameplayScreen extends AbstractScreen {
 
     public void setGameScore(int gameScore) {
         this.gameScore = gameScore;
+        game.setCurrentGameScore(gameScore);
     }
 }
 
