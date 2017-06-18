@@ -13,8 +13,10 @@ public class HTFPGame extends Game {
     public final static int WIDTH = 800;
     private boolean paused;
     private int currentGameScore;
+    public static PlayServices playServices;
 
-    HTFPGame(PlayServices playServices) {
+    public HTFPGame(PlayServices playServices) {
+        this.playServices = playServices;
     }
 
 //    to use
@@ -27,9 +29,6 @@ public class HTFPGame extends Game {
 //game.playServices.showAchievement();
 //game.playServices.isSignedIn();
 
-    public HTFPGame() {
-
-    }
 
     public boolean isPaused() {
         return paused;

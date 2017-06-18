@@ -14,7 +14,7 @@ import com.diti.helpthefallingpeople.HTFPGame;
  */
 
 abstract class AbstractScreen implements Screen {
-    HTFPGame game;
+    public static HTFPGame game;
     Stage stage;
     SpriteBatch spriteBatch;
     private OrthographicCamera camera;

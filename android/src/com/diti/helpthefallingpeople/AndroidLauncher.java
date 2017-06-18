@@ -7,7 +7,6 @@ import android.os.Bundle;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.diti.helpthefallingpeople.screens.SplashScreen;
 import com.diti.helpthefallingpeople.services.PlayServices;
 import com.google.android.gms.games.Games;
 import com.google.example.games.basegameutils.GameHelper;
@@ -32,7 +31,6 @@ public class AndroidLauncher extends AndroidApplication implements PlayServices 
             public void onSignInSucceeded() {
             }
         };
-
         gameHelper.setup(gameHelperListener);
     }
 
@@ -61,8 +59,10 @@ public class AndroidLauncher extends AndroidApplication implements PlayServices 
                 @Override
                 public void run() {
                     gameHelper.beginUserInitiatedSignIn();
+
                 }
             });
+
         } catch (Exception e) {
             Gdx.app.log("MainActivity", "Log in failed: " + e.getMessage() + ".");
         }
@@ -99,6 +99,7 @@ public class AndroidLauncher extends AndroidApplication implements PlayServices 
         if (isSignedIn()) {
             Games.Leaderboards.submitScore(gameHelper.getApiClient(),
                     "highest", highScore);
+
         }
     }
 
