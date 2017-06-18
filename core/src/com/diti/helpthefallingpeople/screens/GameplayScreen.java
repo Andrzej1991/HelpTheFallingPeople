@@ -12,7 +12,6 @@ import com.diti.helpthefallingpeople.HTFPGame;
 import com.diti.helpthefallingpeople.objects.Person;
 import com.diti.helpthefallingpeople.objects.SpawnPoint;
 
-import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
