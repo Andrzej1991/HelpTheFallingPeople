@@ -15,6 +15,7 @@ public class HTFPGame extends Game {
     private int currentGameScore;
     public static PlayServices playServices;
 
+    public HTFPGame() {} //FIXME not sure if it should be here, but otherwise DesktopLauncher crashes
     public HTFPGame(PlayServices playServices) {
         this.playServices = playServices;
     }
