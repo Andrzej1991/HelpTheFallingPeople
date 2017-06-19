@@ -101,11 +101,11 @@ public class Menu extends AbstractScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                // TEST testing score submiting
-                //game.setScreen(new HelpScreen(game));
-                game.playServices.submitScore(12);
+//                game.setScreen(new HelpScreen(game));
+                game.playServices.showScore();
             }
         });
+
 
         // Exit Button
         exitBtn = new TextButton("Exit", textButtonStyle);
