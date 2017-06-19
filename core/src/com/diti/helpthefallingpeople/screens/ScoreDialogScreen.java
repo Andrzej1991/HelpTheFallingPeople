@@ -65,7 +65,7 @@ public class ScoreDialogScreen extends AbstractScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                ps.submitScore(game.getCurrentGameScore());
+                game.playServices.submitScore(game.getCurrentGameScore());
             }
         });
         submitBtn.setDebug(true); //TODO turn off debug before releasing
