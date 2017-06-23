@@ -161,7 +161,7 @@ class GameplayScreen extends AbstractScreen {
 
     private void initWave() {
         generatePeople(15);
-        generateSpawn();
+        generateSpawn(HTFPGame.LEFT_SIDE); //TEST for right
     }
 
     private void generatePeople(int number) {
@@ -189,8 +189,8 @@ class GameplayScreen extends AbstractScreen {
         }
     }
 
-    private void generateSpawn() {
-        spawn = new SpawnPoint(200);
+    private void generateSpawn(int side) {
+        spawn = new SpawnPoint(200, side);
         spawn.setDebug(true); //TODO turn off debug before releasing
         stage.addActor(spawn);
     }
