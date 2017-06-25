@@ -86,7 +86,7 @@ class GameplayScreen extends AbstractScreen {
             }
         }
         if (mStartCounter < 0) {
-            sendWave();
+            sendWave(spawn.getSide());
         }
         if (people.size() > 0) {
             for (int i = 0; i <= people.size() - 1; i++) {
@@ -95,7 +95,7 @@ class GameplayScreen extends AbstractScreen {
                 } else if (i == people.size() - 1) {
                     clearWave();
                     initWave();
-                    sendWave();
+                    sendWave(spawn.getSide());
                 }
             }
         }
@@ -160,11 +160,11 @@ class GameplayScreen extends AbstractScreen {
     }
 
     private void initWave() {
-        generatePeople(15);
-        generateSpawn(HTFPGame.LEFT_SIDE); //TEST for right
+        generateSpawn(HTFPGame.RIGHT_SIDE); //TEST for right
+        generatePeople(15, spawn.getSide());
     }
 
-    private void generatePeople(int number) {
+    private void generatePeople(int number, int side) {
         for (int i = 0; i < number; i++) {
             person = new Person(random.nextFloat(), random.nextFloat());
             person.setY(HTFPGame.HEIGHT - 50);
@@ -183,7 +183,11 @@ class GameplayScreen extends AbstractScreen {
             });
             people.add(person);
         }
-        Collections.sort(people, new PersonComparatorByPosX());
+        if (side == HTFPGame.LEFT_SIDE) {
+            Collections.sort(people, new PersonComparatorByPosX());
+        } else if (side == HTFPGame.RIGHT_SIDE) {
+            Collections.sort(people, new PersonComparatorByPosX().reversed());
+        }
         for (int i = 0; i < people.size(); i++) {
             stage.addActor(people.get(i));
         }
@@ -195,15 +199,23 @@ class GameplayScreen extends AbstractScreen {
         stage.addActor(spawn);
     }
 
-    private void sendWave() {
+    private void sendWave(int side) {
         spawn.setX(spawn.getX() + Gdx.graphics.getDeltaTime() * spawn.getSpeed());
-        throwPeople();
+        throwPeople(side);
     }
 
-    private void throwPeople() {
-        for (int i = 0; i < people.size(); i++) {
-            if (spawn.getX() + spawn.getWidth()/2 >= people.get(i).getPosX()) {
-                people.get(i).setVisible(true);
+    private void throwPeople(int side) {
+        if (side == HTFPGame.LEFT_SIDE) {
+            for (int i = 0; i < people.size(); i++) {
+                if (spawn.getX() + spawn.getWidth() / 2 >= people.get(i).getPosX()) {
+                    people.get(i).setVisible(true);
+                }
+            }
+        } else if (side == HTFPGame.RIGHT_SIDE) {
+            for (int i = 0; i < people.size(); i++) {
+                if (spawn.getX() + spawn.getWidth() / 2 <= people.get(i).getPosX()) {
+                    people.get(i).setVisible(true);
+                }
             }
         }
     }
