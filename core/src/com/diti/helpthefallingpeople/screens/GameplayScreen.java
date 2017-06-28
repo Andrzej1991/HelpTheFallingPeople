@@ -94,7 +94,13 @@ class GameplayScreen extends AbstractScreen {
                     break;
                 } else if (i == people.size() - 1) {
                     clearWave();
-                    initWave(HTFPGame.LEFT_SIDE); //set starting side of next wave
+                    //set starting side of next wave randomly
+                    Random r = new Random();
+                    if (r.nextBoolean()) {
+                        initWave(HTFPGame.LEFT_SIDE);
+                    } else {
+                        initWave(HTFPGame.RIGHT_SIDE);
+                    }
                     sendWave(spawn.getSide());
                 }
             }
