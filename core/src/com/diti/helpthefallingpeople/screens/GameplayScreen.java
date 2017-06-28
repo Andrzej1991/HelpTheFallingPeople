@@ -55,7 +55,7 @@ class GameplayScreen extends AbstractScreen {
         initScore();
         random = new Random();
         people = new ArrayList<Person>();
-        initWave();
+        initWave(HTFPGame.LEFT_SIDE); //set starting side of first wave
     }
 
     @Override
@@ -94,7 +94,7 @@ class GameplayScreen extends AbstractScreen {
                     break;
                 } else if (i == people.size() - 1) {
                     clearWave();
-                    initWave();
+                    initWave(HTFPGame.LEFT_SIDE); //set starting side of next wave
                     sendWave(spawn.getSide());
                 }
             }
@@ -159,8 +159,8 @@ class GameplayScreen extends AbstractScreen {
         setGameScore(0);
     }
 
-    private void initWave() {
-        generateSpawn(HTFPGame.RIGHT_SIDE); //TEST for right
+    private void initWave(int side) {
+        generateSpawn(side);
         generatePeople(15, spawn.getSide());
     }
 
