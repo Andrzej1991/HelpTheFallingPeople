@@ -18,17 +18,11 @@ public class SpawnPoint extends Image {
     private int width, height;
     private float stateTime;
     private float speed;
-    private int side;
 
-    public SpawnPoint(float speed, int side) {
-        this.side = side;
-        setX(side);
+    public SpawnPoint(float speed) {
+        setX(-100);
         setY(HTFPGame.HEIGHT - 50);
-        if (side == HTFPGame.LEFT_SIDE) {
-            this.speed = speed;
-        } else if (side == HTFPGame.RIGHT_SIDE) {
-            this.speed = -speed;
-        }
+        this.speed = speed;
         initGraphic();
         this.setSize(width, height);
         setOrigin(0, 0);
@@ -79,9 +73,5 @@ public class SpawnPoint extends Image {
 
     public void stopSpawn() {
         this.speed = 0;
-    }
-
-    public int getSide() {
-        return side;
     }
 }

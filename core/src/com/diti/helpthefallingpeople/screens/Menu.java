@@ -81,7 +81,7 @@ public class Menu extends AbstractScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                game.setScreen(new RankingScreen(game));
+                game.playServices.showScore();
             }
         });
 
@@ -101,8 +101,7 @@ public class Menu extends AbstractScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-//                game.setScreen(new HelpScreen(game));
-                game.playServices.showScore();
+                game.setScreen(new HelpScreen(game));
             }
         });
 

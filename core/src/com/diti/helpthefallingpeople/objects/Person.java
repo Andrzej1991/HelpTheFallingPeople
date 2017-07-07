@@ -21,10 +21,10 @@ public class Person extends Image {
     private float speed;
 
     public Person(float posX, float speed) {
-        initGraphic();
-        this.posX = posX * (HTFPGame.WIDTH - width);
+        this.posX = posX * HTFPGame.WIDTH;
         setX(this.posX);
         this.speed = speed * 350 + 50;
+        initGraphic();
         this.setSize(width, height);
         setOrigin(0, 0);
     }

@@ -8,6 +8,7 @@ buildscript {
     dependencies {
         classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.6'
         classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.google.gms:google-services:3.1.0'
     }
 }
 
@@ -70,8 +71,7 @@ project(":android") {
         compile "de.tomgrill.gdxfacebook:gdx-facebook-android:1.2.2"
         compile "de.tomgrill.gdxdialogs:gdx-dialogs-android:1.1.0"
         compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
-        compile 'com.google.android.gms:play-services-games:11.0.1'
-        compile 'com.google.android.gms:play-services:11.0.1'
+        compile 'com.google.android.gms:play-services-games:11.0.2'
         compile project(':BaseGameUtils')
     }
 }

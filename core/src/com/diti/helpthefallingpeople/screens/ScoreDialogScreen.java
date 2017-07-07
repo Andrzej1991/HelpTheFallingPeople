@@ -36,7 +36,6 @@ public class ScoreDialogScreen extends AbstractScreen {
         labelStyle = new Label.LabelStyle();
         labelStyle.font = new BitmapFont();
         labelStyle.fontColor = Color.BLACK;
-        initPlayServices();
         initButtons();
         initScore();
     }
@@ -106,50 +105,6 @@ public class ScoreDialogScreen extends AbstractScreen {
         int score = game.getCurrentGameScore();
         scoreLabel.setText("You have saved " + String.valueOf(score) + " people.");
         stage.addActor(scoreLabel);
-    }
-
-    private void initPlayServices(){
-        ps = new PlayServices() {
-            @Override
-            public void signIn() {
-
-            }
-
-            @Override
-            public void signOut() {
-
-            }
-
-            @Override
-            public void rateGame() {
-
-            }
-
-            @Override
-            public void unlockAchievement() {
-
-            }
-
-            @Override
-            public void submitScore(int highScore) {
-
-            }
-
-            @Override
-            public void showAchievement() {
-
-            }
-
-            @Override
-            public void showScore() {
-
-            }
-
-            @Override
-            public boolean isSignedIn() {
-                return false;
-            }
-        };
     }
 
     @Override
