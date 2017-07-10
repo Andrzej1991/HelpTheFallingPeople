@@ -98,8 +98,7 @@ public class AndroidLauncher extends AndroidApplication implements PlayServices 
     public void submitScore(int highScore) {
         if (isSignedIn()) {
             Games.Leaderboards.submitScore(gameHelper.getApiClient(),
-                    "highest", highScore);
-
+                    getString(R.string.leaderboard_tabela_test), highScore);
         }
     }
 
@@ -116,7 +115,7 @@ public class AndroidLauncher extends AndroidApplication implements PlayServices 
     public void showScore() {
         if (isSignedIn()) {
             startActivityForResult(Games.Leaderboards.getLeaderboardIntent(gameHelper.getApiClient(),
-                    "Highest"), requestCode);
+                    getString(R.string.leaderboard_tabela_test)), requestCode);
         } else {
             signIn();
         }

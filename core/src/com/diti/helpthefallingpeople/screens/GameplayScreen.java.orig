@@ -162,13 +162,23 @@ class GameplayScreen extends AbstractScreen {
         setGameScore(0);
     }
 
-    private void initWave() {
-        generatePeople(15);
+<<<<<<< HEAD
+    private void initWave(int side) {
+        generateSpawn(side);
         generatePeople(15, spawn.getSide(), 0, 0);
     }
 
     private void generatePeople(int pplNumber, int side, int alienNumber, int bombNumber) {
         for (int i = 0; i < pplNumber; i++) {
+=======
+    private void initWave() {
+        generatePeople(15);
+        generateSpawn();
+    }
+
+    private void generatePeople(int number) {
+        for (int i = 0; i < number; i++) {
+>>>>>>> origin/master
             person = new Person(random.nextFloat(), random.nextFloat());
             person.setY(HTFPGame.HEIGHT - 50);
             person.setDebug(true); //TODO turn off debug before releasing
