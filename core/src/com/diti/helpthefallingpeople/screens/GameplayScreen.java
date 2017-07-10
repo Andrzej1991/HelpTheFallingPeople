@@ -58,7 +58,7 @@ class GameplayScreen extends AbstractScreen {
         initScore();
         random = new Random();
         people = new ArrayList<Person>();
-        initWave();
+        initWave(HTFPGame.LEFT_SIDE); //set starting side of first wave
     }
 
     @Override
@@ -89,7 +89,7 @@ class GameplayScreen extends AbstractScreen {
             }
         }
         if (mStartCounter < 0) {
-            sendWave();
+            sendWave(spawn.getSide());
         }
         if (people.size() > 0) {
             for (int i = 0; i <= people.size() - 1; i++) {
@@ -97,8 +97,14 @@ class GameplayScreen extends AbstractScreen {
                     break;
                 } else if (i == people.size() - 1) {
                     clearWave();
-                    initWave();
-                    sendWave();
+                    //set starting side of next wave randomly
+                    Random r = new Random();
+                    if (r.nextBoolean()) {
+                        initWave(HTFPGame.LEFT_SIDE);
+                    } else {
+                        initWave(HTFPGame.RIGHT_SIDE);
+                    }
+                    sendWave(spawn.getSide());
                 }
             }
         }
@@ -162,8 +168,8 @@ class GameplayScreen extends AbstractScreen {
         setGameScore(0);
     }
 
-    private void initWave() {
-        generatePeople(15);
+    private void initWave(int side) {
+        generateSpawn(side);
         generatePeople(15, spawn.getSide(), 0, 0);
     }
 
@@ -186,7 +192,11 @@ class GameplayScreen extends AbstractScreen {
             });
             people.add(person);
         }
-        Collections.sort(people, new PersonComparatorByPosX());
+        if (side == HTFPGame.LEFT_SIDE) {
+            Collections.sort(people, new PersonComparatorByPosX());
+        } else if (side == HTFPGame.RIGHT_SIDE) {
+            Collections.sort(people, new PersonComparatorByPosX().reversed());
+        }
         for (int i = 0; i < people.size(); i++) {
             stage.addActor(people.get(i));
         }
@@ -212,21 +222,29 @@ class GameplayScreen extends AbstractScreen {
         }
     }
 
-    private void generateSpawn() {
-        spawn = new SpawnPoint(200);
+    private void generateSpawn(int side) {
+        spawn = new SpawnPoint(200, side);
         spawn.setDebug(true); //TODO turn off debug before releasing
         stage.addActor(spawn);
     }
 
-    private void sendWave() {
+    private void sendWave(int side) {
         spawn.setX(spawn.getX() + Gdx.graphics.getDeltaTime() * spawn.getSpeed());
-        throwPeople();
+        throwPeople(side);
     }
 
-    private void throwPeople() {
-        for (int i = 0; i < people.size(); i++) {
-            if (spawn.getX() + spawn.getWidth()/2 >= people.get(i).getPosX()) {
-                people.get(i).setVisible(true);
+    private void throwPeople(int side) {
+        if (side == HTFPGame.LEFT_SIDE) {
+            for (int i = 0; i < people.size(); i++) {
+                if (spawn.getX() + spawn.getWidth() / 2 >= people.get(i).getPosX()) {
+                    people.get(i).setVisible(true);
+                }
+            }
+        } else if (side == HTFPGame.RIGHT_SIDE) {
+            for (int i = 0; i < people.size(); i++) {
+                if (spawn.getX() + spawn.getWidth() / 2 <= people.get(i).getPosX()) {
+                    people.get(i).setVisible(true);
+                }
             }
         }
     }
