@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.diti.helpthefallingpeople.HTFPGame;
+import com.diti.helpthefallingpeople.objects.Alien;
 import com.diti.helpthefallingpeople.objects.Person;
 import com.diti.helpthefallingpeople.objects.SpawnPoint;
 
@@ -26,6 +27,8 @@ class GameplayScreen extends AbstractScreen {
     private Texture background;
     private Person person;
     private List<Person> people;
+    private Alien alien;
+    private List<Alien> aliens;
     private SpawnPoint spawn;
     private Random random;
     private Label.LabelStyle labelStyle;
@@ -167,11 +170,11 @@ class GameplayScreen extends AbstractScreen {
 
     private void initWave(int side) {
         generateSpawn(side);
-        generatePeople(15, spawn.getSide());
+        generatePeople(15, spawn.getSide(), 0, 0);
     }
 
-    private void generatePeople(int number, int side) {
-        for (int i = 0; i < number; i++) {
+    private void generatePeople(int pplNumber, int side, int alienNumber, int bombNumber) {
+        for (int i = 0; i < pplNumber; i++) {
             person = new Person(random.nextFloat(), random.nextFloat());
             person.setY(HTFPGame.HEIGHT - 50);
             person.setDebug(true); //TODO turn off debug before releasing
@@ -196,6 +199,26 @@ class GameplayScreen extends AbstractScreen {
         }
         for (int i = 0; i < people.size(); i++) {
             stage.addActor(people.get(i));
+        }
+
+        // generate aliens TODO
+        for (int i = 0; i < alienNumber; i++) {
+            alien = new Alien(random.nextFloat(), random.nextFloat());
+            alien.setY(HTFPGame.HEIGHT - 50);
+            alien.setDebug(true); //TODO turn off debug before releasing
+            alien.setVisible(false);
+            alien.addListener(new ClickListener(){
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    Actor a = event.getListenerActor();
+                    int i = aliens.indexOf(a);
+                    aliens.remove(i);
+                    stage.getActors().removeValue(a,false);
+                    updateScore(1);
+                    return super.touchDown(event, x, y, pointer, button);
+                }
+            });
+            aliens.add(alien);
         }
     }
 
