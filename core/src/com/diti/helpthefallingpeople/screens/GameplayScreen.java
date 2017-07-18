@@ -58,6 +58,7 @@ class GameplayScreen extends AbstractScreen {
         initScore();
         random = new Random();
         people = new ArrayList<Person>();
+        aliens = new ArrayList<Alien>();
         initWave(HTFPGame.LEFT_SIDE); //set starting side of first wave
     }
 
@@ -65,10 +66,20 @@ class GameplayScreen extends AbstractScreen {
     public void render(float delta) {
         super.render(delta);
         update();
+
+        //render people
         for (int i = 0; i < people.size(); i++) {
                 people.get(i).setStateTime(people.get(i).getStateTime() + Gdx.graphics.getDeltaTime());
                 people.get(i).setCurrentFrame(people.get(i).getAnimation().getKeyFrame(people.get(i).getStateTime(), true));
         }
+
+        //render aliens
+        for (int i = 0; i < aliens.size(); i++) {
+            aliens.get(i).setStateTime(aliens.get(i).getStateTime() + Gdx.graphics.getDeltaTime());
+            aliens.get(i).setCurrentFrame(aliens.get(i).getAnimation().getKeyFrame(aliens.get(i).getStateTime(), true));
+        }
+
+        // render spawn
         spawn.setStateTime(spawn.getStateTime() + Gdx.graphics.getDeltaTime());
         spawn.setCurrentFrame(spawn.getAnimation().getKeyFrame(spawn.getStateTime(), true));
         drawing();
@@ -86,6 +97,11 @@ class GameplayScreen extends AbstractScreen {
         for (int i = 0; i < people.size(); i++) {
             if (people.get(i).isVisible()) {
                 people.get(i).setY(people.get(i).getY() - Gdx.graphics.getDeltaTime() * people.get(i).getSpeed());
+            }
+        }
+        for (int i = 0; i < aliens.size(); i++) {
+            if (aliens.get(i).isVisible()) {
+                aliens.get(i).setY(aliens.get(i).getY() - Gdx.graphics.getDeltaTime() * aliens.get(i).getSpeed());
             }
         }
         if (mStartCounter < 0) {
@@ -170,10 +186,10 @@ class GameplayScreen extends AbstractScreen {
 
     private void initWave(int side) {
         generateSpawn(side);
-        generatePeople(15, spawn.getSide(), 0, 0);
+        generatePeople(spawn.getSide(), 1, 1, 0);
     }
 
-    private void generatePeople(int pplNumber, int side, int alienNumber, int bombNumber) {
+    private void generatePeople(int side, int pplNumber, int alienNumber, int bombNumber) {
         for (int i = 0; i < pplNumber; i++) {
             person = new Person(random.nextFloat(), random.nextFloat());
             person.setY(HTFPGame.HEIGHT - 50);
@@ -192,14 +208,6 @@ class GameplayScreen extends AbstractScreen {
             });
             people.add(person);
         }
-        if (side == HTFPGame.LEFT_SIDE) {
-            Collections.sort(people, new PersonComparatorByPosX());
-        } else if (side == HTFPGame.RIGHT_SIDE) {
-            Collections.sort(people, new PersonComparatorByPosX().reversed());
-        }
-        for (int i = 0; i < people.size(); i++) {
-            stage.addActor(people.get(i));
-        }
 
         // generate aliens TODO
         for (int i = 0; i < alienNumber; i++) {
@@ -214,11 +222,29 @@ class GameplayScreen extends AbstractScreen {
                     int i = aliens.indexOf(a);
                     aliens.remove(i);
                     stage.getActors().removeValue(a,false);
-                    updateScore(1);
+                    updateScore(-1);
                     return super.touchDown(event, x, y, pointer, button);
                 }
             });
             aliens.add(alien);
+        }
+
+        // sort lists
+        if (side == HTFPGame.LEFT_SIDE) {
+            Collections.sort(people, new PersonComparatorByPosX());
+            Collections.sort(aliens, new AlienComparatorByPosX()); //TEMP aliens
+        } else if (side == HTFPGame.RIGHT_SIDE) {
+            Collections.sort(people, new PersonComparatorByPosX().reversed());
+            Collections.sort(aliens, new AlienComparatorByPosX().reversed()); //TEMP aliens
+        }
+
+        // add falling objects as actors
+        for (int i = 0; i < people.size(); i++) {
+            stage.addActor(people.get(i));
+        }
+        //TEST aliens
+        for (int i = 0; i < aliens.size(); i++) {
+            stage.addActor(aliens.get(i));
         }
     }
 
@@ -239,11 +265,24 @@ class GameplayScreen extends AbstractScreen {
                 if (spawn.getX() + spawn.getWidth() / 2 >= people.get(i).getPosX()) {
                     people.get(i).setVisible(true);
                 }
+
+            }
+            //TEST aliens
+            for (int i = 0; i < aliens.size(); i++) {
+                if (spawn.getX() + spawn.getWidth() / 2 >= aliens.get(i).getPosX()) {
+                    aliens.get(i).setVisible(true);
+                }
             }
         } else if (side == HTFPGame.RIGHT_SIDE) {
             for (int i = 0; i < people.size(); i++) {
                 if (spawn.getX() + spawn.getWidth() / 2 <= people.get(i).getPosX()) {
                     people.get(i).setVisible(true);
+                }
+            }
+            //TEST aliens
+            for (int i = 0; i < aliens.size(); i++) {
+                if (spawn.getX() + spawn.getWidth() / 2 <= aliens.get(i).getPosX()) {
+                    aliens.get(i).setVisible(true);
                 }
             }
         }
@@ -255,7 +294,13 @@ class GameplayScreen extends AbstractScreen {
             stage.getActors().removeValue(people.get(i),true);
             //System.out.println(stage.getActors());
         }
+        //TEST aliens
+        for (int i = 0; i < aliens.size(); i++) {
+            stage.getActors().removeValue(aliens.get(i),true);
+            //System.out.println(stage.getActors());
+        }
         people.clear();
+        aliens.clear(); //TEST aliens
     }
 
     private void showScoreDialog(){
@@ -282,6 +327,18 @@ class GameplayScreen extends AbstractScreen {
 class PersonComparatorByPosX implements Comparator<Person> {
     @Override
     public int compare(Person p1, Person p2) {
+        if (p1.getPosX() <= p2.getPosX()) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
+}
+
+// TEMP temporary class to test the game - later need to make abstract class for each falling object
+class AlienComparatorByPosX implements Comparator<Alien> {
+    @Override
+    public int compare(Alien p1, Alien p2) {
         if (p1.getPosX() <= p2.getPosX()) {
             return 1;
         } else {
