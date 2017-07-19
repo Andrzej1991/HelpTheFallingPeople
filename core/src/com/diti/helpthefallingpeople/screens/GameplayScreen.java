@@ -107,23 +107,50 @@ class GameplayScreen extends AbstractScreen {
         if (mStartCounter < 0) {
             sendWave(spawn.getSide());
         }
+        // TEST - if nothing to fall then create a wave
+        boolean p = false;
+        boolean a = false;
         if (people.size() > 0) {
             for (int i = 0; i <= people.size() - 1; i++) {
                 if (people.get(i).getY() > 0) {
                     break;
                 } else if (i == people.size() - 1) {
-                    clearWave();
-                    //set starting side of next wave randomly
-                    Random r = new Random();
-                    if (r.nextBoolean()) {
-                        initWave(HTFPGame.LEFT_SIDE);
-                    } else {
-                        initWave(HTFPGame.RIGHT_SIDE);
-                    }
-                    sendWave(spawn.getSide());
+                    p = true;
                 }
             }
+        } else {
+            p = true;
         }
+        if (p) {
+            if (aliens.size() > 0) {
+                for (int i = 0; i <= aliens.size() - 1; i++) {
+                    if (aliens.get(i).getY() > 0) {
+                        break;
+                    } else if (i == aliens.size() - 1) {
+                        a = true;
+                    }
+                }
+            } else {
+                a = true;
+            }
+        }
+        if (p && a) {
+            if (spawn.getX() > HTFPGame.WIDTH || spawn.getX() < -spawn.getWidth()) {
+                clearWave();
+                //set starting side of next wave randomly
+                Random r = new Random();
+                if (r.nextBoolean()) {
+                    initWave(HTFPGame.LEFT_SIDE);
+                } else {
+                    initWave(HTFPGame.RIGHT_SIDE);
+                }
+                sendWave(spawn.getSide());
+            }
+        }
+
+
+
+
         stage.act();
     }
 
