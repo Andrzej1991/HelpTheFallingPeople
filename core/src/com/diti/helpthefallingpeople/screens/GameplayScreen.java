@@ -218,7 +218,7 @@ class GameplayScreen extends AbstractScreen {
 
     private void generatePeople(int side, int pplNumber, int alienNumber, int bombNumber) {
         for (int i = 0; i < pplNumber; i++) {
-            person = new Person(random.nextFloat(), random.nextFloat());
+            person = new Person(random.nextFloat(), random.nextFloat(), "sticker_anim_2x1.png", 2, 1);
             person.setY(HTFPGame.HEIGHT - 50);
             person.setDebug(true); //TODO turn off debug before releasing
             person.setVisible(false);
@@ -238,7 +238,7 @@ class GameplayScreen extends AbstractScreen {
 
         // generate aliens TODO
         for (int i = 0; i < alienNumber; i++) {
-            alien = new Alien(random.nextFloat(), random.nextFloat());
+            alien = new Alien(random.nextFloat(), random.nextFloat(), "alien_anim_2x1.png", 2, 1);
             alien.setY(HTFPGame.HEIGHT - 50);
             alien.setDebug(true); //TODO turn off debug before releasing
             alien.setVisible(false);
