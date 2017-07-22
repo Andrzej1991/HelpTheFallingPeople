@@ -13,68 +13,8 @@ import com.diti.helpthefallingpeople.HTFPGame;
  */
 
 public class Person extends FallingObj {
-//    float posX;
-//    private Animation animation;
-//    private TextureRegion currentFrame;
-//    private int width, height;
-//    private float stateTime;
-//    private float speed;
 
     public Person(float posX, float speed, String fileName, int frameCols , int frameRows) {
         super(posX, speed, fileName, frameCols, frameRows);
-//        initGraphic();
-//        this.posX = posX * (HTFPGame.WIDTH - width);
-//        setX(this.posX);
-//        this.speed = speed * 350 + 50;
-//        this.setSize(width, height);
-//        setOrigin(0, 0);
     }
-
-//    private void initGraphic(String fileName, int frameCols , int frameRows) {
-//        Texture frameSheet = new Texture(Gdx.files.internal("sticker_anim_2x1.png"));
-//        int frameCols = 2;
-//        int frameRows = 1;
-//        width = frameSheet.getWidth() / frameCols;
-//        height = frameSheet.getHeight() / frameRows;
-//        TextureRegion[][] personTMP = TextureRegion.split(frameSheet, width, height);
-//        TextureRegion[] frames = new TextureRegion[frameCols * frameRows];
-//        int mIndex = 0;
-//        for (int i = 0; i < frameRows; i++) {
-//            for (int j = 0; j < frameCols; j++) {
-//                frames[mIndex++] = personTMP[i][j];
-//            }
-//        }
-//        animation = new Animation(0.1f, frames);
-//        setCurrentFrame(getAnimation().getKeyFrame(0));
-//    }
-
-//    @Override
-//    public void draw(Batch batch, float parentAlpha) {
-//        //super.draw(batch, parentAlpha);
-//        batch.draw(currentFrame, getX(), getY(), getWidth(), getHeight());
-//    }
-//
-//    public Animation getAnimation() {
-//        return animation;
-//    }
-//
-//    public void setCurrentFrame(TextureRegion currentFrame) {
-//        this.currentFrame = currentFrame;
-//    }
-//
-//    public float getStateTime() {
-//        return stateTime;
-//    }
-//
-//    public float getSpeed() {
-//        return speed;
-//    }
-//
-//    public void setStateTime(float stateTime) {
-//        this.stateTime = stateTime;
-//    }
-//
-//    public float getPosX() {
-//        return posX;
-//    }
 }
