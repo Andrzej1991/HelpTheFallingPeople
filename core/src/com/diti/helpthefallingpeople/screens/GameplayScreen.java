@@ -213,8 +213,7 @@ class GameplayScreen extends AbstractScreen {
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     Actor a = event.getListenerActor();
-                    int i = fallingObjList.indexOf(a);
-                    fallingObjList.remove(i);
+                    fallingObjList.remove(a);
                     stage.getActors().removeValue(a,false);
                     updateScore(1);
                     return super.touchDown(event, x, y, pointer, button);
@@ -233,8 +232,7 @@ class GameplayScreen extends AbstractScreen {
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     Actor a = event.getListenerActor();
-                    int i = fallingObjList.indexOf(a);
-                    fallingObjList.remove(i);
+                    fallingObjList.remove(a);
                     stage.getActors().removeValue(a,false);
                     updateScore(-1);
                     return super.touchDown(event, x, y, pointer, button);
@@ -253,9 +251,20 @@ class GameplayScreen extends AbstractScreen {
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     Actor a = event.getListenerActor();
-                    int i = fallingObjList.indexOf(a);
-                    // TODO kill people visible on the stage
-                    fallingObjList.remove(i);
+                    // Kill people visible on the stage
+                    List<FallingObj> foToRemove = new ArrayList<FallingObj>();
+                    for (FallingObj fo : fallingObjList) {
+                        if (fo instanceof Person && fo.isVisible()){
+                            int aIndex = stage.getActors().indexOf(fo, false);
+                            foToRemove.add(fo);
+                            if (aIndex >= 0) {
+                                stage.getActors().removeIndex(aIndex);
+                            }
+                        }
+                    }
+                    fallingObjList.remove(a);
+                    fallingObjList.removeAll(foToRemove);
+                    foToRemove.clear();
                     stage.getActors().removeValue(a,false);
                     updateScore(-10);
                     return super.touchDown(event, x, y, pointer, button);
