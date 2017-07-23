@@ -196,7 +196,7 @@ class GameplayScreen extends AbstractScreen {
     private void generateFallingObj(int side, int pplNumber, int alienNumber, int bombNumber) {
         for (int i = 0; i < pplNumber; i++) {
             person = new Person(random.nextFloat(), random.nextFloat(), "sticker_anim_2x1.png", 2, 1);
-            person.setY(HTFPGame.HEIGHT - 50);
+            person.setY(spawn.getY());
             person.setDebug(true); //TODO turn off debug before releasing
             person.setVisible(false);
             person.addListener(new ClickListener(){
@@ -215,7 +215,7 @@ class GameplayScreen extends AbstractScreen {
         // generate aliens
         for (int i = 0; i < alienNumber; i++) {
             alien = new Alien(random.nextFloat(), random.nextFloat(), "alien_anim_2x1.png", 2, 1);
-            alien.setY(HTFPGame.HEIGHT - 50);
+            alien.setY(spawn.getY());
             alien.setDebug(true); //TODO turn off debug before releasing
             alien.setVisible(false);
             alien.addListener(new ClickListener(){
@@ -234,7 +234,7 @@ class GameplayScreen extends AbstractScreen {
         // generate bombs
         for (int i = 0; i < bombNumber; i++) {
             bomb = new Bomb(random.nextFloat(), random.nextFloat(), "bomb_anim_2x1.png", 2, 1);
-            bomb.setY(HTFPGame.HEIGHT - 50);
+            bomb.setY(spawn.getY());
             bomb.setDebug(true); //TODO turn off debug before releasing
             bomb.setVisible(false);
             bomb.addListener(new ClickListener(){
