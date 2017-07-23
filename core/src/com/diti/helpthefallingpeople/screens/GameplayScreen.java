@@ -200,10 +200,10 @@ class GameplayScreen extends AbstractScreen {
 
     private void initWave(int side) {
         generateSpawn(side);
-        generatePeople(spawn.getSide(), 10, 7, 10);
+        generateFallingObj(spawn.getSide(), 10, 10, 5);
     }
 
-    private void generatePeople(int side, int pplNumber, int alienNumber, int bombNumber) {
+    private void generateFallingObj(int side, int pplNumber, int alienNumber, int bombNumber) {
         for (int i = 0; i < pplNumber; i++) {
             person = new Person(random.nextFloat(), random.nextFloat(), "sticker_anim_2x1.png", 2, 1);
             person.setY(HTFPGame.HEIGHT - 50);
@@ -285,10 +285,10 @@ class GameplayScreen extends AbstractScreen {
 
     private void sendWave(int side) {
         spawn.setX(spawn.getX() + Gdx.graphics.getDeltaTime() * spawn.getSpeed());
-        throwPeople(side);
+        throwFallingObj(side);
     }
 
-    private void throwPeople(int side) {
+    private void throwFallingObj(int side) {
         if (side == HTFPGame.LEFT_SIDE) {
             for (int i = 0; i < fallingObjList.size(); i++) {
                 if (spawn.getX() + spawn.getWidth() / 2 >= fallingObjList.get(i).getPosX()) {
