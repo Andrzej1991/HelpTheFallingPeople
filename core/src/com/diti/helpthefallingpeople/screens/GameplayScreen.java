@@ -64,6 +64,10 @@ class GameplayScreen extends AbstractScreen {
     private int aliensCount;
     private Label aliensLabel;
 
+    // Level count
+    private int levelCount;
+    private Label levelLabel;
+
     GameplayScreen(final HTFPGame game) {
         super(game);
     }
@@ -78,6 +82,7 @@ class GameplayScreen extends AbstractScreen {
         initClock();
         initScore();
         initFallingObjectsCounters();
+        initLevelCounter();
         random = new Random();
         fallingObjList = new ArrayList<FallingObj>();
         initWave(HTFPGame.LEFT_SIDE); // set starting side of first wave
@@ -117,6 +122,9 @@ class GameplayScreen extends AbstractScreen {
 
         aliensLabel.setText("Aliens: " + String.valueOf(getAliensCount()));
         aliensLabel.setFontScale(1);
+
+        levelLabel.setText("Lvl: " + String.valueOf(getLevelCount()));
+        levelLabel.setFontScale(1);
 
         for (int i = 0; i < fallingObjList.size(); i++) {
             if (fallingObjList.get(i).isVisible()) {
@@ -175,36 +183,6 @@ class GameplayScreen extends AbstractScreen {
         stage.draw();
     }
 
-    private void updateStartCounter(){
-        mStartCounter -= Gdx.graphics.getDeltaTime();
-        startCounterStr = String.format("%2.0f", mStartCounter);
-    }
-
-    private void updateClock(boolean update){
-        if (update) {
-            mClock -= Gdx.graphics.getDeltaTime();
-        } else {
-            mClock = 0;
-        }
-        clockStr = String.format("%2.0f", mClock);
-    }
-
-    private void updateScore(int update){
-        setGameScore(getGameScore() + update);
-    }
-
-    private void updateIdlePeopleCount(int update){
-        setIdlePeopleCount(getIdlePeopleCount() + update);
-    }
-
-    private void updateWorkingPeopleCount(int update) {
-        setWorkingPeopleCount(getWorkingPeopleCount() + update);
-    }
-
-    private void updateAliensCount(int update){
-        setAliensCount(getAliensCount() + update);
-    }
-
     private void initStartCounter(){
         startCounterLabel = new Label("", labelStyle);
         startCounterLabel.setPosition((float) ((HTFPGame.WIDTH*0.9)/2), HTFPGame.HEIGHT/2);
@@ -244,6 +222,13 @@ class GameplayScreen extends AbstractScreen {
         aliensLabel.setPosition(300, HTFPGame.HEIGHT - 10);
         stage.addActor(aliensLabel);
         setAliensCount(0);
+    }
+
+    private void initLevelCounter() {
+        levelLabel = new Label("", labelStyle);
+        levelLabel.setPosition(700, HTFPGame.HEIGHT - 10);
+        stage.addActor(levelLabel);
+        setLevelCount(1);
     }
 
     private void initWave(int side) {
@@ -381,6 +366,48 @@ class GameplayScreen extends AbstractScreen {
         stage.dispose();
     }
 
+    // ***
+    // UPDATERS
+    // ***
+
+    private void updateStartCounter(){
+        mStartCounter -= Gdx.graphics.getDeltaTime();
+        startCounterStr = String.format("%2.0f", mStartCounter);
+    }
+
+    private void updateClock(boolean update){
+        if (update) {
+            mClock -= Gdx.graphics.getDeltaTime();
+        } else {
+            mClock = 0;
+        }
+        clockStr = String.format("%2.0f", mClock);
+    }
+
+    private void updateScore(int update){
+        setGameScore(getGameScore() + update);
+    }
+
+    private void updateIdlePeopleCount(int update){
+        setIdlePeopleCount(getIdlePeopleCount() + update);
+    }
+
+    private void updateWorkingPeopleCount(int update) {
+        setWorkingPeopleCount(getWorkingPeopleCount() + update);
+    }
+
+    private void updateAliensCount(int update){
+        setAliensCount(getAliensCount() + update);
+    }
+
+    private void updateLevelCounter(){
+        setLevelCount(getLevelCount() + 1);
+    }
+
+    // ***
+    // GETTERS AND SETTERS
+    // ***
+
     public int getGameScore() {
         return gameScore;
     }
@@ -412,6 +439,14 @@ class GameplayScreen extends AbstractScreen {
 
     public void setAliensCount(int aliensCount) {
         this.aliensCount = aliensCount;
+    }
+
+    public int getLevelCount() {
+        return levelCount;
+    }
+
+    public void setLevelCount(int levelCount) {
+        this.levelCount = levelCount;
     }
 }
 
