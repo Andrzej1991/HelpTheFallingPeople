@@ -102,41 +102,31 @@ class GameplayScreen extends AbstractScreen {
             sendWave(spawn.getSide());
         }
 
-        if (fallingObjList.size() > 0) {
-            for (int i = 0; i <= fallingObjList.size() - 1; i++) {
-                if (fallingObjList.get(i).getY() > 0) {
-                    break;
-                } else if (i == fallingObjList.size() - 1) {
-                    if (spawn.getX() > HTFPGame.WIDTH || spawn.getX() < -spawn.getWidth()) {
-                        clearWave();
-                        //set starting side of next wave randomly
-                        Random r = new Random();
-                        if (r.nextBoolean()) {
-                            initWave(HTFPGame.LEFT_SIDE);
-                        } else {
-                            initWave(HTFPGame.RIGHT_SIDE);
-                        }
-                        sendWave(spawn.getSide());
-                    }
-                }
-            }
-        }
-
-        // get rid of fallen objects (Y < 0)
-        List<Integer> listI = new ArrayList<Integer>();
+        // Get rid of all FallingObj when they reach bottom of the stage
+        List<FallingObj> foToRemove = new ArrayList<FallingObj>();
         for (FallingObj fo:fallingObjList) {
             if (fo.getY() < 0){
-                int i = fallingObjList.indexOf(fo);
-                //fallingObjList.remove(i);
-                listI.add(i);
                 stage.getActors().removeValue(fo,false);
+                foToRemove.add(fo);
             }
         }
-        // TEST to avoid java.util.ConcurrentModificationException
-        for (Integer i:listI) {
-            fallingObjList.remove(i);
+        fallingObjList.removeAll(foToRemove);
+        foToRemove.clear();
+
+        // If there is no FallingObj on the stage then send new wave
+        if (fallingObjList.size() == 0) {
+            if (spawn.getX() > HTFPGame.WIDTH || spawn.getX() < -spawn.getWidth()) {
+                clearWave();
+                //set starting side of next wave randomly
+                Random r = new Random();
+                if (r.nextBoolean()) {
+                    initWave(HTFPGame.LEFT_SIDE);
+                } else {
+                    initWave(HTFPGame.RIGHT_SIDE);
+                }
+                sendWave(spawn.getSide());
+            }
         }
-        listI.clear();
 
         stage.act();
     }
