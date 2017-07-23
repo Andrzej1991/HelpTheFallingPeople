@@ -36,17 +36,33 @@ class GameplayScreen extends AbstractScreen {
 
     private SpawnPoint spawn;
     private Random random;
+
     private Label.LabelStyle labelStyle;
+    // Start counter
     private Label startCounterLabel;
     private String startCounterStr;
     private float mStartCounter;
 
+    // Score
     private int gameScore;
     private Label scoreLabel;
 
+    // Clock
     private Label clockLabel;
     private String clockStr;
     private float mClock;
+
+    // Idle people
+    private int idlePeopleCount;
+    private Label idlePeopleLabel;
+
+    // Working people
+    private int workingPeopleCount;
+    private Label workingPeopleLabel;
+
+    // Aliens count
+    private int aliensCount;
+    private Label aliensLabel;
 
     GameplayScreen(final HTFPGame game) {
         super(game);
@@ -61,6 +77,7 @@ class GameplayScreen extends AbstractScreen {
         initStartCounter();
         initClock();
         initScore();
+        initFallingObjectsCounters();
         random = new Random();
         fallingObjList = new ArrayList<FallingObj>();
         initWave(HTFPGame.LEFT_SIDE); // set starting side of first wave
@@ -91,6 +108,15 @@ class GameplayScreen extends AbstractScreen {
 
         scoreLabel.setText("Score: " + String.valueOf(getGameScore()));
         scoreLabel.setFontScale(1);
+
+        idlePeopleLabel.setText("Idle people: " + String.valueOf(getIdlePeopleCount()));
+        idlePeopleLabel.setFontScale(1);
+
+        workingPeopleLabel.setText("Working people: " + String.valueOf(getWorkingPeopleCount()));
+        workingPeopleLabel.setFontScale(1);
+
+        aliensLabel.setText("Aliens: " + String.valueOf(getAliensCount()));
+        aliensLabel.setFontScale(1);
 
         for (int i = 0; i < fallingObjList.size(); i++) {
             if (fallingObjList.get(i).isVisible()) {
@@ -167,6 +193,18 @@ class GameplayScreen extends AbstractScreen {
         setGameScore(getGameScore() + update);
     }
 
+    private void updateIdlePeopleCount(int update){
+        setIdlePeopleCount(getIdlePeopleCount() + update);
+    }
+
+    private void updateWorkingPeopleCount(int update) {
+        setWorkingPeopleCount(getWorkingPeopleCount() + update);
+    }
+
+    private void updateAliensCount(int update){
+        setAliensCount(getAliensCount() + update);
+    }
+
     private void initStartCounter(){
         startCounterLabel = new Label("", labelStyle);
         startCounterLabel.setPosition((float) ((HTFPGame.WIDTH*0.9)/2), HTFPGame.HEIGHT/2);
@@ -188,12 +226,33 @@ class GameplayScreen extends AbstractScreen {
         setGameScore(0);
     }
 
+    private void initFallingObjectsCounters() {
+        // Idle people
+        idlePeopleLabel = new Label("", labelStyle);
+        idlePeopleLabel.setPosition(10, HTFPGame.HEIGHT - 10);
+        stage.addActor(idlePeopleLabel);
+        setIdlePeopleCount(0);
+
+        // Working people
+        workingPeopleLabel = new Label("", labelStyle);
+        workingPeopleLabel.setPosition(130, HTFPGame.HEIGHT - 10);
+        stage.addActor(workingPeopleLabel);
+        setWorkingPeopleCount(0);
+
+        // Aliens count
+        aliensLabel = new Label("", labelStyle);
+        aliensLabel.setPosition(300, HTFPGame.HEIGHT - 10);
+        stage.addActor(aliensLabel);
+        setAliensCount(0);
+    }
+
     private void initWave(int side) {
         generateSpawn(side);
         generateFallingObj(spawn.getSide(), 10, 10, 5);
     }
 
     private void generateFallingObj(int side, int pplNumber, int alienNumber, int bombNumber) {
+        // generate people
         for (int i = 0; i < pplNumber; i++) {
             person = new Person(random.nextFloat(), random.nextFloat(), "sticker_anim_2x1.png", 2, 1);
             person.setY(spawn.getY());
@@ -206,6 +265,7 @@ class GameplayScreen extends AbstractScreen {
                     fallingObjList.remove(a);
                     stage.getActors().removeValue(a,false);
                     updateScore(1);
+                    updateIdlePeopleCount(1);
                     return super.touchDown(event, x, y, pointer, button);
                 }
             });
@@ -328,6 +388,30 @@ class GameplayScreen extends AbstractScreen {
     public void setGameScore(int gameScore) {
         this.gameScore = gameScore;
         game.setCurrentGameScore(gameScore);
+    }
+
+    public int getIdlePeopleCount() {
+        return idlePeopleCount;
+    }
+
+    public void setIdlePeopleCount(int idlePeopleCount) {
+        this.idlePeopleCount = idlePeopleCount;
+    }
+
+    public int getWorkingPeopleCount() {
+        return workingPeopleCount;
+    }
+
+    public void setWorkingPeopleCount(int workingPeopleCount) {
+        this.workingPeopleCount = workingPeopleCount;
+    }
+
+    public int getAliensCount() {
+        return aliensCount;
+    }
+
+    public void setAliensCount(int aliensCount) {
+        this.aliensCount = aliensCount;
     }
 }
 
