@@ -67,6 +67,7 @@ class GameplayScreen extends AbstractScreen {
     // Level count
     private int levelCount;
     private Label levelLabel;
+    private int levelMaxScore;
 
     GameplayScreen(final HTFPGame game) {
         super(game);
@@ -111,7 +112,7 @@ class GameplayScreen extends AbstractScreen {
 
         clockLabel.setText(clockStr);
 
-        scoreLabel.setText("Score: " + String.valueOf(getGameScore()));
+        scoreLabel.setText("Score: " + String.valueOf(getGameScore()) + "/" + String.valueOf(getLevelMaxScore()));
         scoreLabel.setFontScale(1);
 
         idlePeopleLabel.setText("Idle people: " + String.valueOf(getIdlePeopleCount()));
@@ -199,7 +200,7 @@ class GameplayScreen extends AbstractScreen {
 
     private void initScore() {
         scoreLabel = new Label("", labelStyle);
-        scoreLabel.setPosition(20, (float) (HTFPGame.HEIGHT*2/9));
+        scoreLabel.setPosition(700, HTFPGame.HEIGHT - 10);
         stage.addActor(scoreLabel);
         setGameScore(0);
     }
@@ -226,9 +227,10 @@ class GameplayScreen extends AbstractScreen {
 
     private void initLevelCounter() {
         levelLabel = new Label("", labelStyle);
-        levelLabel.setPosition(700, HTFPGame.HEIGHT - 10);
+        levelLabel.setPosition(650, HTFPGame.HEIGHT - 10);
         stage.addActor(levelLabel);
         setLevelCount(1);
+        setLevelMaxScore(game.countMaxScoreForLevel(game.getCurrentLevel()));
     }
 
     private void initWave(int side) {
@@ -447,6 +449,14 @@ class GameplayScreen extends AbstractScreen {
 
     public void setLevelCount(int levelCount) {
         this.levelCount = levelCount;
+    }
+
+    public int getLevelMaxScore() {
+        return levelMaxScore;
+    }
+
+    public void setLevelMaxScore(int levelMaxScore) {
+        this.levelMaxScore = levelMaxScore;
     }
 }
 
