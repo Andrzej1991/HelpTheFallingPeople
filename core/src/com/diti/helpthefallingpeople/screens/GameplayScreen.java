@@ -107,6 +107,14 @@ class GameplayScreen extends AbstractScreen {
     }
 
     private void update() {
+        // check score
+        // TODO check score
+        if (getGameScore() >= getLevelMaxScore()) {
+            updateLevelCounter();
+            game.setCurrentLevel(getLevelCount());
+            updateMaxScoreForLevel(getLevelCount());
+        }
+
         startCounterLabel.setText(startCounterStr);
         startCounterLabel.setFontScale(5);
 
@@ -195,7 +203,7 @@ class GameplayScreen extends AbstractScreen {
         clockLabel = new Label("", labelStyle);
         clockLabel.setPosition((float)(HTFPGame.WIDTH*8/9), (float)(HTFPGame.HEIGHT*8/9));
         stage.addActor(clockLabel);
-        mClock = 30;
+        mClock = 300;
     }
 
     private void initScore() {
