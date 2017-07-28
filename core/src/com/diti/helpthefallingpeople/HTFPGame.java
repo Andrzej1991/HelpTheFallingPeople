@@ -13,10 +13,10 @@ public class HTFPGame extends Game {
     public final static int WIDTH = 800;
     public final static int LEFT_SIDE = -100;
     public final static int RIGHT_SIDE = HTFPGame.WIDTH + 100;
+    public final static double MAX_SCORE_MULTIPLYER = 1.3;
     private boolean paused;
     private int currentGameScore;
     private int currentLevel; //TEST
-    private final static double MAX_SCORE_MULTIPLYER = 1.3;
     private int currentIdlePeople; //TEST
     private int currentWorkingPeople; //TEST
     private int currentAliens; //TEST
@@ -36,14 +36,6 @@ public class HTFPGame extends Game {
 //game.playServices.showScore();
 //game.playServices.showAchievement();
 //game.playServices.isSignedIn();
-
-    public int countMaxScoreForLevel (int level) {
-        int max = 10;
-        for (int i = 1; i < level; i++) {
-            max += Math.floor(i * Math.pow(MAX_SCORE_MULTIPLYER, i - 1) * 10);
-        }
-        return max;
-    }
 
     public int getCurrentLevel() {
         return currentLevel;

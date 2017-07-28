@@ -230,7 +230,7 @@ class GameplayScreen extends AbstractScreen {
         levelLabel.setPosition(650, HTFPGame.HEIGHT - 10);
         stage.addActor(levelLabel);
         setLevelCount(1);
-        setLevelMaxScore(game.countMaxScoreForLevel(game.getCurrentLevel()));
+        setLevelMaxScore(updateMaxScoreForLevel(game.getCurrentLevel()));
     }
 
     private void initWave(int side) {
@@ -404,6 +404,15 @@ class GameplayScreen extends AbstractScreen {
 
     private void updateLevelCounter(){
         setLevelCount(getLevelCount() + 1);
+    }
+
+    private int updateMaxScoreForLevel(int level) {
+        int max = 10;
+        for (int i = 1; i < level; i++) {
+            max += Math.floor((i+1) * Math.pow(HTFPGame.MAX_SCORE_MULTIPLYER, i) * 10);
+        }
+        setLevelMaxScore(max);
+        return max;
     }
 
     // ***
