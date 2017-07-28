@@ -395,7 +395,11 @@ class GameplayScreen extends AbstractScreen {
     }
 
     private void updateScore(int update){
-        setGameScore(getGameScore() + update);
+        if (getGameScore() + update >= 0) {
+            setGameScore(getGameScore() + update);
+        } else {
+            setGameScore(0);
+        }
     }
 
     private void updateIdlePeopleCount(int update){
