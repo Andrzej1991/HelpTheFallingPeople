@@ -13,4 +13,7 @@ public interface PlayServices {
     public void showAchievement();
     public void showScore();
     public boolean isSignedIn();
+    //I could forget something, so if you want to hide just
+    // game.playservices.showBannerAdd(false); and to unhide jsut change to true
+    public void showBannerAdd(boolean show);
 }

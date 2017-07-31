@@ -21,6 +21,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
+import static com.badlogic.gdx.Application.ApplicationType.Android;
+
 /**
  * Created by DiTi on 2017-04-09.
  */
@@ -75,6 +77,7 @@ class GameplayScreen extends AbstractScreen {
 
     @Override
     protected void init() {
+        game.playServices.showBannerAdd(false);
         background = new Texture("sub_screen.png");
         labelStyle = new Label.LabelStyle();
         labelStyle.font = new BitmapFont();
@@ -369,6 +372,7 @@ class GameplayScreen extends AbstractScreen {
     private void showScoreDialog(){
         // TODO add code to pause and present dialog with score
         game.setScreen(new ScoreDialogScreen(game));
+        game.playServices.showBannerAdd(true);
     }
 
     @Override

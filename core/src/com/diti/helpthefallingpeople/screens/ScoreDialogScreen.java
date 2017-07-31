@@ -12,7 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.diti.helpthefallingpeople.HTFPGame;
-import com.diti.helpthefallingpeople.services.PlayServices;
 
 /**
  * Created by terebun on 2017-06-08.
@@ -24,7 +23,6 @@ public class ScoreDialogScreen extends AbstractScreen {
     private TextButton submitBtn, restartBtn, menuBtn;
     private Label.LabelStyle labelStyle;
     private Label scoreLabel;
-    private PlayServices ps;
 
     public ScoreDialogScreen(HTFPGame game) {
         super(game);

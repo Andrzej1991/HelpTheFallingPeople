@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "49455866074",
-    "firebase_url": "https://fallings-people.firebaseio.com",
-    "project_id": "fallings-people",
-    "storage_bucket": "fallings-people.appspot.com"
+    "project_number": "217859276503",
+    "firebase_url": "https://help-the-falling-people-231020.firebaseio.com",
+    "project_id": "help-the-falling-people-231020",
+    "storage_bucket": "help-the-falling-people-231020.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:49455866074:android:0bd79b1d481209b8",
+        "mobilesdk_app_id": "1:217859276503:android:0bd79b1d481209b8",
         "android_client_info": {
           "package_name": "com.diti.helpthefallingpeople"
         }
       },
       "oauth_client": [
         {
-          "client_id": "49455866074-mhdsc31omekth643to566pkfskl2p3b4.apps.googleusercontent.com",
+          "client_id": "217859276503-25koej12ukaoi4o73ddhp9mh7lcg717n.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCBvUNxF_Q53bqT2Of5ZdlP9LGOAM2dSq0"
+          "current_key": "AIzaSyAUCHEoZRrfqMf5P9fdrxKRlZeUBA5_acw"
         }
       ],
       "services": {
@@ -29,8 +29,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "217859276503-25koej12ukaoi4o73ddhp9mh7lcg717n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
