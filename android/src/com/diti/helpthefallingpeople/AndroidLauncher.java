@@ -41,6 +41,7 @@ public class AndroidLauncher extends AndroidApplication implements PlayServices 
                 case HIDE_ADS:
                     adView.setVisibility(View.GONE);
                     break;
+
             }
         }
     };
