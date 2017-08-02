@@ -77,7 +77,7 @@ class GameplayScreen extends AbstractScreen {
 
     @Override
     protected void init() {
-        game.playServices.showBannerAdd(false);
+        //game.playServices.showBannerAdd(false);
         background = new Texture("sub_screen.png");
         labelStyle = new Label.LabelStyle();
         labelStyle.font = new BitmapFont();
@@ -206,7 +206,7 @@ class GameplayScreen extends AbstractScreen {
         clockLabel = new Label("", labelStyle);
         clockLabel.setPosition((float)(HTFPGame.WIDTH*8/9), (float)(HTFPGame.HEIGHT*8/9));
         stage.addActor(clockLabel);
-        mClock = 300;
+        mClock = 90;
     }
 
     private void initScore() {
@@ -246,7 +246,12 @@ class GameplayScreen extends AbstractScreen {
 
     private void initWave(int side) {
         generateSpawn(side);
-        generateFallingObj(spawn.getSide(), 10, 10, 5);
+        // TEST set number of FO for each level
+        int p = getLevelCount();
+        int a = (int) Math.floor((getLevelCount() - 1) / 3);
+        int b = (int) Math.floor((getLevelCount() + 2) / 5);
+        generateFallingObj(spawn.getSide(), p, a, b);
+        //generateFallingObj(spawn.getSide(), 10, 10, 5); // method for testing
     }
 
     private void generateFallingObj(int side, int pplNumber, int alienNumber, int bombNumber) {
@@ -372,7 +377,7 @@ class GameplayScreen extends AbstractScreen {
     private void showScoreDialog(){
         // TODO add code to pause and present dialog with score
         game.setScreen(new ScoreDialogScreen(game));
-        game.playServices.showBannerAdd(true);
+        //game.playServices.showBannerAdd(true);
     }
 
     @Override
