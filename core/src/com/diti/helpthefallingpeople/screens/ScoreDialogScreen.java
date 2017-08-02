@@ -30,7 +30,7 @@ public class ScoreDialogScreen extends AbstractScreen {
 
     @Override
     protected void init() {
-        background = new Texture("scoredialog_placeholder.jpg");
+        background = new Texture("screen_backgrounds/scoredialog_placeholder.jpg");
         labelStyle = new Label.LabelStyle();
         labelStyle.font = new BitmapFont();
         labelStyle.fontColor = Color.BLACK;

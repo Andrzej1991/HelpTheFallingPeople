@@ -35,7 +35,7 @@ public class SpawnPoint extends Image {
     }
 
     private void initGraphic() {
-        Texture frameSheet = new Texture(Gdx.files.internal("ufo_anim_4x1.png"));
+        Texture frameSheet = new Texture(Gdx.files.internal("sprites/ufo_anim_4x1.png"));
         int frameCols = 4;
         int frameRows = 1;
         width = frameSheet.getWidth() / frameCols;

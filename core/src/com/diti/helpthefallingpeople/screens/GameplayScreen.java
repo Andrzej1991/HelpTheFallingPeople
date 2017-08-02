@@ -78,7 +78,7 @@ class GameplayScreen extends AbstractScreen {
     @Override
     protected void init() {
         //game.playServices.showBannerAdd(false);
-        background = new Texture("sub_screen.png");
+        background = new Texture("screen_backgrounds/sub_screen.png");
         labelStyle = new Label.LabelStyle();
         labelStyle.font = new BitmapFont();
         labelStyle.fontColor = Color.BLACK;
@@ -257,7 +257,7 @@ class GameplayScreen extends AbstractScreen {
     private void generateFallingObj(int side, int pplNumber, int alienNumber, int bombNumber) {
         // generate people
         for (int i = 0; i < pplNumber; i++) {
-            person = new Person(random.nextFloat(), random.nextFloat(), "sticker_anim_2x1.png", 2, 1);
+            person = new Person(random.nextFloat(), random.nextFloat(), "sprites/sticker_anim_2x1.png", 2, 1);
             person.setY(spawn.getY());
             person.setDebug(true); //TODO turn off debug before releasing
             person.setVisible(false);
@@ -277,7 +277,7 @@ class GameplayScreen extends AbstractScreen {
 
         // generate aliens
         for (int i = 0; i < alienNumber; i++) {
-            alien = new Alien(random.nextFloat(), random.nextFloat(), "alien_anim_2x1.png", 2, 1);
+            alien = new Alien(random.nextFloat(), random.nextFloat(), "sprites/alien_anim_2x1.png", 2, 1);
             alien.setY(spawn.getY());
             alien.setDebug(true); //TODO turn off debug before releasing
             alien.setVisible(false);
@@ -296,7 +296,7 @@ class GameplayScreen extends AbstractScreen {
 
         // generate bombs
         for (int i = 0; i < bombNumber; i++) {
-            bomb = new Bomb(random.nextFloat(), random.nextFloat(), "bomb_anim_2x1.png", 2, 1);
+            bomb = new Bomb(random.nextFloat(), random.nextFloat(), "sprites/bomb_anim_2x1.png", 2, 1);
             bomb.setY(spawn.getY());
             bomb.setDebug(true); //TODO turn off debug before releasing
             bomb.setVisible(false);

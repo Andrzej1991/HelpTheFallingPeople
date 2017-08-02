@@ -30,7 +30,7 @@ public class Menu extends AbstractScreen {
 
     @Override
     protected void init() {
-        background = new Texture("menubgnd_placeholder.jpg");
+        background = new Texture("screen_backgrounds/menubgnd_placeholder.jpg");
         initMenuButtons();
     }
 

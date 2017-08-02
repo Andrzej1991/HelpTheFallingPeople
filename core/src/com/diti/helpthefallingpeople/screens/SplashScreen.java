@@ -24,7 +24,7 @@ public class SplashScreen extends AbstractScreen {
     }
 
     protected void init() {
-        splashImg = new Texture("splashscreen_placeholder.jpg");
+        splashImg = new Texture("screen_backgrounds/splashscreen_placeholder.jpg");
     }
 
     public void render(float delta) {
