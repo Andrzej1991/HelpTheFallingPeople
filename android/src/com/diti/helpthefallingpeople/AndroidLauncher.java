@@ -17,6 +17,8 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.games.Games;
 import com.google.example.games.basegameutils.GameHelper;
 
@@ -27,8 +29,10 @@ public class AndroidLauncher extends AndroidApplication implements PlayServices 
     private final static int requestCode = 1;
     private static final String TAG = "AndroidLauncher";
     private static final String AD_UNIT_ID = "ca-app-pub-2389435775598003/9283453493";
+    private static final String AD_INTERSTITIAL_ID = "ca-app-pub-2389435775598003/7101415775";
 
     private GameHelper gameHelper;
+    private InterstitialAd interstitialAd;
     protected static AdView adView;
 
     Handler handler = new Handler() {
@@ -41,7 +45,6 @@ public class AndroidLauncher extends AndroidApplication implements PlayServices 
                 case HIDE_ADS:
                     adView.setVisibility(View.GONE);
                     break;
-
             }
         }
     };
@@ -50,6 +53,16 @@ public class AndroidLauncher extends AndroidApplication implements PlayServices 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         adView = new AdView(this);
+        interstitialAd = new InterstitialAd(this);
+        interstitialAd.setAdUnitId(AD_INTERSTITIAL_ID);
+        AdRequest adRequestInter = new AdRequest.Builder().build();
+        interstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+
+            }
+        });
+        interstitialAd.loadAd(adRequestInter);
         AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
         View gameView = initializeForView(new HTFPGame(this), config);
         RelativeLayout relativeLayout = new RelativeLayout(this);
@@ -182,6 +195,24 @@ public class AndroidLauncher extends AndroidApplication implements PlayServices 
     public void showBannerAdd(boolean show) {
         handler.sendEmptyMessage(show ? SHOW_ADS : HIDE_ADS);
     }
+
+    @Override
+    public void showInterstitialAd() {
+        try {
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    if (interstitialAd.isLoaded()) {
+                        interstitialAd.show();
+                    } else {
+                        AdRequest interstitialRequest = new AdRequest.Builder().build();
+                        interstitialAd.loadAd(interstitialRequest);
+                    }
+                }
+            });
+        } catch (Exception e) {
+        }
+    }
+
 
     @Override
     public void onPause() {

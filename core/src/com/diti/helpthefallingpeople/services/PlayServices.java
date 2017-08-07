@@ -16,4 +16,5 @@ public interface PlayServices {
     //I could forget something, so if you want to hide just
     // game.playservices.showBannerAdd(false); and to unhide jsut change to true
     public void showBannerAdd(boolean show);
+    public void showInterstitialAd();
 }

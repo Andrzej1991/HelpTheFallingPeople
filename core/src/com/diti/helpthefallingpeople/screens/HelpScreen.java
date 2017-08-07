@@ -16,7 +16,7 @@ public class HelpScreen extends AbstractScreen {
 
     @Override
     protected void init() {
-        background = new Texture("sub_screen.png");
+        background = new Texture("screen_backgrounds/sub_screen.png");
     }
 
     @Override

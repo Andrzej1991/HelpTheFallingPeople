@@ -53,6 +53,7 @@ public class Menu extends AbstractScreen {
         textButtonStyle.up = skin.getDrawable("button_04");
         //textButtonStyle.down = skin.getDrawable("button_02");
 
+        //TODO enable checkerforAdd
         // Start Button
         startBtn = new TextButton("New game", textButtonStyle);
         startBtn.addListener(new ClickListener() {
@@ -60,6 +61,7 @@ public class Menu extends AbstractScreen {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 game.setScreen(new GameplayScreen(game));
+//                game.checkGlobalCounterForAdd();
             }
         });
         startBtn.setDebug(true); //TODO turn off debug before releasing
@@ -71,6 +73,7 @@ public class Menu extends AbstractScreen {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 game.setScreen(new OptionsScreen(game));
+//                game.checkGlobalCounterForAdd();
             }
         });
         optionsBtn.setDebug(true);
@@ -82,6 +85,7 @@ public class Menu extends AbstractScreen {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 game.playServices.showScore();
+//                game.checkGlobalCounterForAdd();
             }
         });
 
@@ -92,6 +96,7 @@ public class Menu extends AbstractScreen {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 game.setScreen(new AboutScreen(game));
+//                game.checkGlobalCounterForAdd();
             }
         });
 
@@ -102,6 +107,7 @@ public class Menu extends AbstractScreen {
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 game.setScreen(new HelpScreen(game));
+//                game.checkGlobalCounterForAdd();
             }
         });
 

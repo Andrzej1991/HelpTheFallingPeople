@@ -20,22 +20,15 @@ public class HTFPGame extends Game {
     private int currentIdlePeople; //TEST
     private int currentWorkingPeople; //TEST
     private int currentAliens; //TEST
+    private int globalCounterForAdd = 0;
     public static PlayServices playServices;
 
-    public HTFPGame() {} //FIXME not sure if it should be here, but otherwise DesktopLauncher crashes
+    public HTFPGame() {
+    } //FIXME not sure if it should be here, but otherwise DesktopLauncher crashes
+
     public HTFPGame(PlayServices playServices) {
         this.playServices = playServices;
     }
-
-//    to use
-//   game.playServices.signIn();
-//game.playServices.signOut();
-//game.playServices.rateGame();
-//game.playServices.unlockAchievement();
-//game.playServices.submitScore(score);
-//game.playServices.showScore();
-//game.playServices.showAchievement();
-//game.playServices.isSignedIn();
 
     public int getCurrentLevel() {
         return currentLevel;
@@ -83,6 +76,14 @@ public class HTFPGame extends Game {
 
     public void setCurrentGameScore(int currentGameScore) {
         this.currentGameScore = currentGameScore;
+    }
+
+    public void checkGlobalCounterForAdd() {
+        globalCounterForAdd++;
+        if (globalCounterForAdd == 3) {
+            this.playServices.showInterstitialAd();
+            globalCounterForAdd = 0;
+        }
     }
 
     @Override
