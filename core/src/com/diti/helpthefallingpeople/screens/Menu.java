@@ -95,7 +95,8 @@ public class Menu extends AbstractScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                game.setScreen(new AboutScreen(game));
+                //game.setScreen(new AboutScreen(game));
+                game.setScreen(new UpgradeScreen(game)); // testing
 //                game.checkGlobalCounterForAdd();
             }
         });
