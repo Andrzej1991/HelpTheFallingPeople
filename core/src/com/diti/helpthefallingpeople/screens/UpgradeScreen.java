@@ -24,6 +24,7 @@ public class UpgradeScreen extends AbstractScreen {
     private Label.LabelStyle labelStyle;
     private Texture researchTexture, alienTexture, catchTexture, gunTexture;
     private Image researchImg, alienImg, catchImg, gunImg;
+    private Label h1Label, h2Label, h3Label, h4Label;
     private Label researchLabel, alienLabel, catchLabel, gunLabel;
     private TextButton researchBuyBtn, alienBuyBtn, catchBuyBtn, gunBuyBtn;
 
@@ -57,6 +58,16 @@ public class UpgradeScreen extends AbstractScreen {
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
         textButtonStyle.font = font;
         textButtonStyle.up = skin.getDrawable("button_04");
+
+        // headers
+        h1Label = new Label("", labelStyle);
+        h1Label.setText("");
+        h2Label = new Label("", labelStyle);
+        h2Label.setText("Name");
+        h3Label = new Label("", labelStyle);
+        h3Label.setText("Cost");
+        h4Label = new Label("", labelStyle);
+        h4Label.setText("");
 
         // research upgrade
         researchTexture = new Texture("upgrade_buttons/research_button.png");
@@ -135,6 +146,11 @@ public class UpgradeScreen extends AbstractScreen {
         table.add(gunLabel).minWidth(120);
         table.add(gunBuyBtn).minWidth(120);
         table.row();
+        table.add(h1Label).maxWidth(50).maxHeight(50).padRight(10);
+        table.add(h2Label).minWidth(100);
+        table.add(h3Label).minWidth(250).maxWidth(300);
+        table.add(h4Label).minWidth(80);
+        table.row().padTop(5);
         stage.addActor(table);
         Gdx.input.setCatchBackKey(true);
     }
