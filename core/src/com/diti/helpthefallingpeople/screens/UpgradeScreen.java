@@ -26,6 +26,7 @@ public class UpgradeScreen extends AbstractScreen {
     private Image researchImg, alienImg, catchImg, gunImg;
     private Label h1Label, h2Label, h3Label, h4Label;
     private Label researchLabel, alienLabel, catchLabel, gunLabel;
+    private Label researchCostLabel, alienCostLabel, catchCostLabel, gunCostLabel;
     private TextButton researchBuyBtn, alienBuyBtn, catchBuyBtn, gunBuyBtn;
 
     UpgradeScreen(HTFPGame game) {
@@ -74,6 +75,8 @@ public class UpgradeScreen extends AbstractScreen {
         researchImg = new Image(researchTexture);
         researchLabel = new Label("", labelStyle);
         researchLabel.setText("Research");
+        researchCostLabel = new Label("", labelStyle);
+        researchCostLabel.setText("5 people");
         researchBuyBtn = new TextButton("Buy", textButtonStyle);
         researchBuyBtn.addListener(new ClickListener() {
             @Override
@@ -89,6 +92,8 @@ public class UpgradeScreen extends AbstractScreen {
         alienImg = new Image(alienTexture);
         alienLabel = new Label("", labelStyle);
         alienLabel.setText("Alien");
+        alienCostLabel = new Label("", labelStyle);
+        alienCostLabel.setText("10 people, Research");
         alienBuyBtn = new TextButton("Buy", textButtonStyle);
         alienBuyBtn.addListener(new ClickListener() {
             @Override
@@ -104,6 +109,8 @@ public class UpgradeScreen extends AbstractScreen {
         catchImg = new Image(catchTexture);
         catchLabel = new Label("", labelStyle);
         catchLabel.setText("Catch");
+        catchCostLabel = new Label("", labelStyle);
+        catchCostLabel.setText("50 people, Research");
         catchBuyBtn = new TextButton("Buy", textButtonStyle);
         catchBuyBtn.addListener(new ClickListener() {
             @Override
@@ -119,6 +126,8 @@ public class UpgradeScreen extends AbstractScreen {
         gunImg = new Image(gunTexture);
         gunLabel = new Label("", labelStyle);
         gunLabel.setText("Gun");
+        gunCostLabel = new Label("", labelStyle);
+        gunCostLabel.setText("100 people, 20 aliens, Research");
         gunBuyBtn = new TextButton("Buy", textButtonStyle);
         gunBuyBtn.addListener(new ClickListener() {
             @Override
