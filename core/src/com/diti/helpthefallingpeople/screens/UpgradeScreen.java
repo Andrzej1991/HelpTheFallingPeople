@@ -139,27 +139,31 @@ public class UpgradeScreen extends AbstractScreen {
         gunBuyBtn.setDebug(true); //TODO turn off debug before releasing
 
         // Table
-        table.add(researchImg).minWidth(120);
-        table.add(researchLabel).minWidth(120);
-        table.add(researchBuyBtn).minWidth(120);
-        table.row();
-        table.add(alienImg).minWidth(120);
-        table.add(alienLabel).minWidth(120);
-        table.add(alienBuyBtn).minWidth(120);
-        table.row();
-        table.add(catchImg).minWidth(120);
-        table.add(catchLabel).minWidth(120);
-        table.add(catchBuyBtn).minWidth(120);
-        table.row();
-        table.add(gunImg).minWidth(120);
-        table.add(gunLabel).minWidth(120);
-        table.add(gunBuyBtn).minWidth(120);
-        table.row();
         table.add(h1Label).maxWidth(50).maxHeight(50).padRight(10);
         table.add(h2Label).minWidth(100);
         table.add(h3Label).minWidth(250).maxWidth(300);
         table.add(h4Label).minWidth(80);
         table.row().padTop(5);
+        table.add(researchImg).maxWidth(50).maxHeight(50).padRight(10);
+        table.add(researchLabel).minWidth(100);
+        table.add(researchCostLabel).minWidth(250).maxWidth(300);
+        table.add(researchBuyBtn).minWidth(80);
+        table.row().padTop(5);
+        table.add(alienImg).maxWidth(50).maxHeight(50).padRight(10);
+        table.add(alienLabel).minWidth(100);
+        table.add(alienCostLabel).minWidth(250).maxWidth(300);
+        table.add(alienBuyBtn).minWidth(80);
+        table.row().padTop(5);
+        table.add(catchImg).maxWidth(50).maxHeight(50).padRight(10);
+        table.add(catchLabel).minWidth(100);
+        table.add(catchCostLabel).minWidth(250).maxWidth(300);
+        table.add(catchBuyBtn).minWidth(80);
+        table.row().padTop(5);
+        table.add(gunImg).maxWidth(50).maxHeight(50).padRight(10);
+        table.add(gunLabel).minWidth(100);
+        table.add(gunCostLabel).minWidth(250).maxWidth(300);
+        table.add(gunBuyBtn).minWidth(80);
+        //table.row();
         stage.addActor(table);
         Gdx.input.setCatchBackKey(true);
     }
